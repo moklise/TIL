@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EE19F2781CD97F0400C2E5A5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE19F2771CD97F0400C2E5A5 /* main.cpp */; };
+		EE19F27F1CD98F7400C2E5A5 /* challenger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE19F27E1CD98F7400C2E5A5 /* challenger.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		EE19F2741CD97F0400C2E5A5 /* playground */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = playground; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE19F2771CD97F0400C2E5A5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		EE19F27E1CD98F7400C2E5A5 /* challenger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = challenger.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				EE19F2771CD97F0400C2E5A5 /* main.cpp */,
+				EE19F27E1CD98F7400C2E5A5 /* challenger.cpp */,
 			);
 			path = playground;
 			sourceTree = "<group>";
@@ -118,7 +120,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE19F2781CD97F0400C2E5A5 /* main.cpp in Sources */,
+				EE19F27F1CD98F7400C2E5A5 /* challenger.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +241,7 @@
 				EE19F27D1CD97F0400C2E5A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
