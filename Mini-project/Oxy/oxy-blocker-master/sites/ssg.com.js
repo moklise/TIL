@@ -24,9 +24,10 @@ var css = `
 
 
 OxyBlocker.initialize(css, {
-	wrap: 'wrap',
-	list: '#idProductImg > tbody > tr > td > .list_content > .itembx',
-	title: function(e) {
-   	 return e.querySelector('.subject').textContent;
+	wrap: '#idProductImg',
+	list: 'div.itembx',
+	title: function(el) {
+   	 return el.querySelector('.subject').textContent;
 	}
 },true);
+

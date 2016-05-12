@@ -39,7 +39,6 @@ var OxyBlocker = (function() {
       if (timer) { clearTimeout(timer); }
       timer = setTimeout(function() {
         var list = Array.from($$(selectors.list, wrap));
-         console.log("CONTINUEING");
         list.forEach(function(item) {
           if (typeof selectors.title == 'function') {
             var title = selectors.title(item);
