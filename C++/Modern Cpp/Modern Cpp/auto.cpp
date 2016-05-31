@@ -10,6 +10,26 @@
 #include <vector>
 using namespace std;
 
+template<class T>
+class Matrix {
+public:
+    T i;
+    Matrix& operator=(const Matrix& m){
+        this->i = m.i;
+        return *this;
+    }
+    
+    Matrix operator+(const Matrix& m){
+        Matrix* m0 = new Matrix();
+        
+        m0->i = this->i + m.i;
+        
+        return *m0;
+    }
+    
+    
+};
+
 int main(void){
     
     // Base auto Sample in for
@@ -18,5 +38,12 @@ int main(void){
     for( auto i : v ){
         cout << i << endl;
     }
+    
+    // 형식 명시 초기치 관용구와 auto
+    
+    Matrix<int> m1, m2, m3, m4;
+    
+//    auto sum = static_cast<Matrix>(m1 + m2 + m3 + m4);
+    
     
 }

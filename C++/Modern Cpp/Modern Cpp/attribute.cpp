@@ -7,6 +7,12 @@
 //
 
 #include <iostream>
+
+[[noreturn]] void func1(){
+    std::cout << "NORETURN" << std::endl;
+}
+
+
 int main(void) {
     
     int selector = 1;

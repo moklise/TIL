@@ -11,11 +11,10 @@
 using namespace std;
 
 int main(void){
+    // Lambda : [Capture-list](parameter){code};
     
     // Base lambda Sample
     auto f = [](){};
-    
-    // [Capture-list](parameter){code};
     
     // Lambda in for
     vector<int> v = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
