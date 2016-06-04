@@ -8,11 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.Calendar;
 
 public class ScrollingActivity extends AppCompatActivity {
 
+    TextView todayWeather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +28,9 @@ public class ScrollingActivity extends AppCompatActivity {
         // Change Title String
         getSupportActionBar().setTitle(setToday());
 
-//        updateInfo();
+        // updateInfo();
+        todayWeather = (TextView) findViewById(R.id.todayWeatherText);
+        todayWeather.setText(XmlParser.StartParsing());
 
         // Floating Button 클릭시 Popup
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
