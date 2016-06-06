@@ -1,10 +1,18 @@
 [
     {
-        "merged": "C:\\Users\\minseok\\Desktop\\TIL\\Homework\\Android\\OnceCheck\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
-        "source": "C:\\Users\\minseok\\Desktop\\TIL\\Homework\\Android\\OnceCheck\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
+        "merged": "/Users/minseok/Desktop/TIL/Homework/Android/OnceCheck/app/build/intermediates/res/merged/debug/anim-v21/design_bottom_sheet_slide_out.xml",
+        "source": "/Users/minseok/Desktop/TIL/Homework/Android/OnceCheck/app/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/anim-v21/design_bottom_sheet_slide_out.xml"
     },
     {
-        "merged": "C:\\Users\\minseok\\Desktop\\TIL\\Homework\\Android\\OnceCheck\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_in.xml",
-        "source": "C:\\Users\\minseok\\Desktop\\TIL\\Homework\\Android\\OnceCheck\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\anim-v21\\design_bottom_sheet_slide_in.xml"
+        "merged": "/Users/minseok/Desktop/TIL/Homework/Android/OnceCheck/C:\\Users\\minseok\\Desktop\\TIL\\Homework\\Android\\OnceCheck\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_out.xml",
+        "source": "/Users/minseok/Desktop/TIL/Homework/Android/OnceCheck/C:\\Users\\minseok\\Desktop\\TIL\\Homework\\Android\\OnceCheck\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\anim-v21\\design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "/Users/minseok/Desktop/TIL/Homework/Android/OnceCheck/app/build/intermediates/res/merged/debug/anim-v21/design_bottom_sheet_slide_in.xml",
+        "source": "/Users/minseok/Desktop/TIL/Homework/Android/OnceCheck/app/build/intermediates/exploded-aar/com.android.support/design/23.3.0/res/anim-v21/design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "/Users/minseok/Desktop/TIL/Homework/Android/OnceCheck/C:\\Users\\minseok\\Desktop\\TIL\\Homework\\Android\\OnceCheck\\app\\build\\intermediates\\res\\merged\\debug\\anim-v21\\design_bottom_sheet_slide_in.xml",
+        "source": "/Users/minseok/Desktop/TIL/Homework/Android/OnceCheck/C:\\Users\\minseok\\Desktop\\TIL\\Homework\\Android\\OnceCheck\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\anim-v21\\design_bottom_sheet_slide_in.xml"
     }
 ]

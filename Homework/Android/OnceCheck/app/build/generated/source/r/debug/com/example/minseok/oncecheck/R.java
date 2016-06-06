@@ -2389,6 +2389,7 @@ containing a value of this type.
         public static final int src_atop=0x7f0c0029;
         public static final int src_in=0x7f0c002a;
         public static final int src_over=0x7f0c002b;
+        public static final int ss=0x7f0c0087;
         public static final int start=0x7f0c0025;
         public static final int status_bar_latest_event_content=0x7f0c007b;
         public static final int submit_area=0x7f0c0065;

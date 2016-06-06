@@ -46,8 +46,7 @@
                 android:id="@+id/todayWeatherText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dip"
-                android:text="오늘의 날씨는 이러하므로 뭐 입으세여"/>
+                android:layout_margin="5dip" />
 
         </LinearLayout>
 

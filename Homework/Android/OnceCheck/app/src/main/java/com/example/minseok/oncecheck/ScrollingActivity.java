@@ -10,8 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.Calendar;
-
 public class ScrollingActivity extends AppCompatActivity {
 
     TextView todayWeather;
@@ -26,11 +24,16 @@ public class ScrollingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // Change Title String
-        getSupportActionBar().setTitle(setToday());
+        getSupportActionBar().setTitle(NetworkManager.getToday());
+
+
+        NetworkManager DataConnector = new NetworkManager();
+        DataConnector.start();
 
         // updateInfo();
         todayWeather = (TextView) findViewById(R.id.todayWeatherText);
-        todayWeather.setText(XmlParser.StartParsing());
+        todayWeather.setText("오늘의 밥은 이렇습니다 : " + DataConnector.getFood());
+
 
         // Floating Button 클릭시 Popup
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -41,52 +44,6 @@ public class ScrollingActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
-
-    private String setToday(){
-        Calendar cal = Calendar.getInstance();
-
-        //현재 년도, 월, 일
-        int year = cal.get ( cal.YEAR );
-        int month = cal.get ( cal.MONTH ) + 1 ;
-        int date = cal.get ( cal.DATE ) ;
-        String DayOfWeek = "";
-
-        cal.set(Calendar.YEAR, year);
-        cal.set(Calendar.MONTH, month);
-        cal.set(Calendar.DATE, date);
-
-        DayOfWeek = String.valueOf(month)+"/"+String.valueOf(date)+" ";
-
-        switch (cal.get(Calendar.DAY_OF_WEEK)){
-            case 1:
-                DayOfWeek += "일요일";
-                break;
-            case 2:
-                DayOfWeek += "월요일";
-                break;
-            case 3:
-                DayOfWeek += "화요일";
-                break;
-            case 4:
-                DayOfWeek += "수요일";
-                break;
-            case 5:
-                DayOfWeek += "목요일";
-                break;
-            case 6:
-                DayOfWeek += "금요일";
-                break;
-            case 7:
-                DayOfWeek += "토요일";
-                break;
-        }
-
-        return DayOfWeek;
-    }
-
-    private void updateInfo(){
-
     }
 
     @Override

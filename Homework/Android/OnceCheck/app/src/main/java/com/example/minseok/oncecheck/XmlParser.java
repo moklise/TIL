@@ -1,13 +1,18 @@
 package com.example.minseok.oncecheck;
 
+import android.util.Log;
+
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by minseok on 2016-06-02.
@@ -15,16 +20,72 @@ import java.net.URL;
 
 public class XmlParser{
 
-    public static String StartParsing() {
-        String url = "http://www.gachon.ac.kr/etc/food_xml.jsp";
+    static public ArrayList<String> StartParsing(String url, String status) {
         String xml = downloadURL(url);
-        return parseXML(xml);
+        return parseXML(xml, status);
+    }
+
+    // Status 가 food 일경우와 weather일 경우가 다르다
+    private static String CheckLine(XmlPullParser parser, int eventType, String status) throws IOException, XmlPullParserException {
+
+        switch (status){
+
+            // 학식
+            case "Food":
+                switch (eventType){
+                    case XmlPullParser.START_DOCUMENT:
+
+                        System.out.println("Start document");
+                        Log.d("MSTEST", "Start document");
+
+                        break;
+
+                    case XmlPullParser.START_TAG:
+
+                        break;
+                }
+                break;
+            
+            // 오늘의 날씨
+            case "todayWeather":
+                switch (eventType) {
+                    case XmlPullParser.START_DOCUMENT:
+
+                        System.out.println("Start document");
+                        Log.d("MSTEST", "Start document");
+
+                        break;
+
+                    case XmlPullParser.START_TAG:
+
+                        if (parser.getName().equals("temp")) {
+                            parser.next();
+                            Log.d("DATALIST", parser.getText());
+                            Log.d("MSTEST", parser.getText());
+                            return parser.getText();
+
+                        }
+
+                        break;
+                    default:
+                }
+                break;
+
+            // 내일의 날씨
+//            case "tomorrowWeather":
+//                break;
+
+            default:
+
+        }
+
+        return "값이 없음";
     }
 
     // XML 형식의 String 처리
-    private static String parseXML(String xml) {
-        int itemtype = 0;
-        String itemText = "이러면 못잡는거";
+    private static ArrayList<String> parseXML(String xml, String status) {
+        ArrayList<String> tempDataList = null;
+
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             XmlPullParser parser = factory.newPullParser();
@@ -33,38 +94,27 @@ public class XmlParser{
             // 여기까지 의미있는부분을 짤라준다.
             int eventType = parser.getEventType();
             while (eventType != XmlPullParser.END_DOCUMENT) {
-                if(eventType == XmlPullParser.START_DOCUMENT) {
-                    System.out.println("Start document");
-                } else if(eventType == XmlPullParser.START_TAG) {
-                    System.out.println("Start tag "+parser.getName());
-                } else if(eventType == XmlPullParser.END_TAG) {
-                    System.out.println("End tag "+parser.getName());
-                } else if(eventType == XmlPullParser.TEXT) {
-                    System.out.println("Text "+parser.getText());
-                }
+                tempDataList.add(CheckLine(parser, eventType, status));
                 eventType = parser.next();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         // Pasring 결과
-//        return itemText;
-        return xml;
+        return tempDataList;
     }
 
-    // XML 형식의 Stirng 반환
+    // DOCUMENT 읽기 XML 형식의 Stirng 반환
     private static String downloadURL(String addr) {
         String doc = "";
+
+        Log.d("MSTEST","START READING DOCUMENT");
+
         try {
             URL url = new URL(addr);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
-
-            conn.setConnectTimeout(10000);
-            conn.setUseCaches(false);
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream()));
             for (;;) {
                 String line = br.readLine();
                 if (line == null)
@@ -73,14 +123,13 @@ public class XmlParser{
             }
             br.close();
 
-            // conn.disconnect();
-
+            conn.disconnect();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
+        Log.d("MSTEST","END READING DOCUMENT");
         return doc;
 
     }
-
 }
