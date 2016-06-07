@@ -28,9 +28,9 @@ public class LoadingActivity extends Activity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), ScrollingActivity.class);
+                Intent intent = new Intent(getBaseContext(), ScrollingActivity.class);
                 intent.putExtra("DataList", (Parcelable) DataConnector);
-                startActivityForResult(intent, 100);
+                startActivity(intent);
                 Log.d("DOCUMENT", "보내쨩");
                 finish();
             }

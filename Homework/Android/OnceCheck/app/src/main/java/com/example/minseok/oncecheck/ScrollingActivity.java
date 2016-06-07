@@ -12,19 +12,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+
 public class ScrollingActivity extends AppCompatActivity {
 
-    TextView todayWeather = (TextView) findViewById(R.id.todayWeatherText);
+//    TextView todayWeather = (TextView) findViewById(R.id.todayWeatherText);
+    TextView todayWeather;
     NetworkManager DataConnector;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
 
         Log.d("DOCUMENT", "뀨뀨뀨꺄꺄꺄꺆뀨ㄸ류ㅕㄸㅠㄸ류ㅕㄸ뀨ㅕㄸ류ㅕ뜎뗘뀨ㄸ");
+
         try{
-//            DataConnector = data.getParcelableExtra("DataList");
-//            todayWeather.setText("현재 온도는 : " + DataConnector.getWeather() + "입니다.");
+            DataConnector = data.getParcelableExtra("DataList");
+            todayWeather.setText("현재 온도는 : " + DataConnector.getWeather() + "입니다.");
         }catch (Exception e){
             Log.d("DOCUMENT", e.getMessage());
         }
@@ -35,6 +38,8 @@ public class ScrollingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
 
+        todayWeather = (TextView) findViewById(R.id.todayWeatherText);
+
         // Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -43,6 +48,10 @@ public class ScrollingActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(NetworkManager.getToday());
 
         // updateInfo();
+        Bundle bundle = getIntent().getExtras();
+        DataConnector = (NetworkManager)bundle.getParcelable("DataList");
+        Log.d("DOCUMENT", String.valueOf(DataConnector.DataList2.isEmpty()));
+        todayWeather.setText("현재 온도는 : " + DataConnector.getWeather() + "입니다.");
 
 
 
@@ -78,4 +87,6 @@ public class ScrollingActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

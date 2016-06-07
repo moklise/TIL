@@ -18,7 +18,7 @@ class NetworkManager extends Thread implements Parcelable {
     String weatherURL = "http://web.kma.go.kr/wid/queryDFSRSS.jsp?zone=4113162000";
 
     private ArrayList<String> DataList = new ArrayList<>();
-    private ArrayList<String> DataList2 = new ArrayList<>();
+    public ArrayList<String> DataList2 = new ArrayList<>();
 
 
     public NetworkManager(){
@@ -84,9 +84,9 @@ class NetworkManager extends Thread implements Parcelable {
         return "오늘의 밥";
     }
 
+
     public String getWeather(){
-//        return String.valueOf(DataList2.get(0));
-        return "111";
+        return String.valueOf(DataList2.get(0));
     }
 
     public String getFits(){
