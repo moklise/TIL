@@ -1,10 +1,12 @@
 package com.example.minseok.oncecheck;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +14,21 @@ import android.widget.TextView;
 
 public class ScrollingActivity extends AppCompatActivity {
 
-    TextView todayWeather;
+    TextView todayWeather = (TextView) findViewById(R.id.todayWeatherText);
+    NetworkManager DataConnector;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+
+        Log.d("DOCUMENT", "뀨뀨뀨꺄꺄꺄꺆뀨ㄸ류ㅕㄸㅠㄸ류ㅕㄸ뀨ㅕㄸ류ㅕ뜎뗘뀨ㄸ");
+        try{
+//            DataConnector = data.getParcelableExtra("DataList");
+//            todayWeather.setText("현재 온도는 : " + DataConnector.getWeather() + "입니다.");
+        }catch (Exception e){
+            Log.d("DOCUMENT", e.getMessage());
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +42,9 @@ public class ScrollingActivity extends AppCompatActivity {
         // Change Title String
         getSupportActionBar().setTitle(NetworkManager.getToday());
 
-
-        NetworkManager DataConnector = new NetworkManager();
-        DataConnector.start();
-
         // updateInfo();
-        todayWeather = (TextView) findViewById(R.id.todayWeatherText);
-        todayWeather.setText("오늘의 밥은 이렇습니다 : " + DataConnector.getFood());
+
+
 
 
         // Floating Button 클릭시 Popup
