@@ -68,6 +68,28 @@ public class XmlParser{
                 }
                 break;
 
+            case "TODAYWEATHERMAX":
+                switch (eventType) {
+
+                    case XmlPullParser.START_DOCUMENT:
+
+                        System.out.println("Start document");
+                        Log.d("MSTEST", "Start document");
+
+                        break;
+
+                    case XmlPullParser.START_TAG:
+                        if (parser.getName().equals("tmx")) {
+                            parser.next();
+                            Log.d("DOCUMENT", parser.getText());
+                            return parser.getText();
+                        }
+
+                        break;
+                    default:
+                }
+                break;
+
             // 내일의 날씨
 //            case "tomorrowWeather":
 //                break;

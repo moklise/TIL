@@ -1,7 +1,5 @@
 package com.example.minseok.oncecheck;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -12,50 +10,19 @@ import java.util.Calendar;
  */
 
 // 네트워크 데이터 관리
-class NetworkManager extends Thread implements Parcelable {
+class NetworkManager extends Thread {
     Thread crawler;
     String foodURL = "http://www.gachon.ac.kr/etc/food_xml.jsp";
     String weatherURL = "http://web.kma.go.kr/wid/queryDFSRSS.jsp?zone=4113162000";
 
     private ArrayList<String> DataList = new ArrayList<>();
     public ArrayList<String> DataList2 = new ArrayList<>();
+    public ArrayList<String> weatherMaxTemp = new ArrayList<>();
 
 
     public NetworkManager(){
         Log.d("MSTEST", "Network Manager 생성");
     }
-
-    protected NetworkManager(Parcel in) {
-        foodURL = in.readString();
-        weatherURL = in.readString();
-        DataList = in.createStringArrayList();
-        DataList2 = in.createStringArrayList();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(foodURL);
-        dest.writeString(weatherURL);
-        dest.writeStringList(DataList);
-        dest.writeStringList(DataList2);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<NetworkManager> CREATOR = new Creator<NetworkManager>() {
-        @Override
-        public NetworkManager createFromParcel(Parcel in) {
-            return new NetworkManager(in);
-        }
-
-        @Override
-        public NetworkManager[] newArray(int size) {
-            return new NetworkManager[size];
-        }
-    };
 
     public void start(){
         Log.d("MSTEST", "Tread 생성 시작");
@@ -66,10 +33,10 @@ class NetworkManager extends Thread implements Parcelable {
     @Override
     public void run() {
         super.run();
-
-        Log.d("MSTEST", "Tread 작동");
+        Log.d("DOCUMENT", "################### NETWORKMANAGER THREAD RUN ###################");
 //        DataList = (ArrayList<String>) XmlParser.StartParsing(foodURL, "FOOD").clone();
         DataList2 = (ArrayList<String>) XmlParser.StartParsing(weatherURL, "TODAYWEATHER").clone();
+        weatherMaxTemp = (ArrayList<String>) XmlParser.StartParsing(weatherURL, "TODAYWEATHERMAX").clone();
 
         try{
 //            Log.d("DOCUMENT", "############ 내가 원하는 값 ############" + String.valueOf(DataList.get(0)));
@@ -77,6 +44,16 @@ class NetworkManager extends Thread implements Parcelable {
         }catch(Exception e){
             Log.d("DOCUMENT", "############ 응 안됨~ ############" + e.getMessage());
         }
+        if(DataList2.isEmpty()){
+            Log.d("DOCUMENT", " 중 :삐었따!!!!!!!! 비었어!!!!!");
+        }else{
+            Log.d("DOCUMENT", " 중 : 만들어서 이미 채워 넣었음");
+        }
+
+        LoadingActivity.getDataList((ArrayList<String>) DataList2.clone());
+        LoadingActivity.getDataListMax((ArrayList<String>) weatherMaxTemp.clone());
+        Log.d("DOCUMENT", "################### NETWORKMANAGER THREAD RUN 끝 ###################");
+
     }
 
     public String getFood(){
@@ -93,13 +70,16 @@ class NetworkManager extends Thread implements Parcelable {
         return "옷";
     }
 
-    public void getData(){
+    public ArrayList<String> getDataList(){
+
+
         try{
-            Log.d("DOCUMENT", "############ 내가 원하는 값 ############" + String.valueOf(DataList.get(0)));
             Log.d("DOCUMENT", "############ 내가 원하는 값 ############" + String.valueOf(DataList2.get(0)));
         }catch(Exception e){
             Log.d("DOCUMENT", "############ 응 안됨~ ############" + e.getMessage());
         }
+
+        return (ArrayList<String>) this.DataList2.clone();
     }
 
     static public String getToday(){

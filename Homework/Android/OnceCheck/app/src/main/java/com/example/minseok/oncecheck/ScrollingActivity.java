@@ -1,37 +1,26 @@
 package com.example.minseok.oncecheck;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 public class ScrollingActivity extends AppCompatActivity {
 
 //    TextView todayWeather = (TextView) findViewById(R.id.todayWeatherText);
     TextView todayWeather;
+    TextView todayWeatherSub;
+    TextView todayClass;
     NetworkManager DataConnector;
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        Log.d("DOCUMENT", "뀨뀨뀨꺄꺄꺄꺆뀨ㄸ류ㅕㄸㅠㄸ류ㅕㄸ뀨ㅕㄸ류ㅕ뜎뗘뀨ㄸ");
-
-        try{
-            DataConnector = data.getParcelableExtra("DataList");
-            todayWeather.setText("현재 온도는 : " + DataConnector.getWeather() + "입니다.");
-        }catch (Exception e){
-            Log.d("DOCUMENT", e.getMessage());
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +28,9 @@ public class ScrollingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scrolling);
 
         todayWeather = (TextView) findViewById(R.id.todayWeatherText);
+        todayWeatherSub = (TextView) findViewById(R.id.todayWeatherTextSub);
+        todayClass = (TextView) findViewById(R.id.todayClass);
+        DataConnector  = new NetworkManager();
 
         // Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -49,11 +41,14 @@ public class ScrollingActivity extends AppCompatActivity {
 
         // updateInfo();
         Bundle bundle = getIntent().getExtras();
-        DataConnector = (NetworkManager)bundle.getParcelable("DataList");
-        Log.d("DOCUMENT", String.valueOf(DataConnector.DataList2.isEmpty()));
-        todayWeather.setText("현재 온도는 : " + DataConnector.getWeather() + "입니다.");
+        ArrayList<String> weather = bundle.getStringArrayList("weather");
+        ArrayList<String> weatherMax = bundle.getStringArrayList("weatherMax");
+
+        todayWeather.setText("현재 온도는 " + weather.get(0) + "입니다. \n 오늘의 최고 기온은 : " + weatherMax.get(0) + "입니다.");
+        todayWeatherSub.setText("그냥 집에 계시는게 낫겠네요");
 
 
+        todayClass.setText("기기");
 
 
         // Floating Button 클릭시 Popup
