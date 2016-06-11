@@ -16,8 +16,11 @@ class NetworkManager extends Thread {
     String weatherURL = "http://web.kma.go.kr/wid/queryDFSRSS.jsp?zone=4113162000";
 
     private ArrayList<String> DataList = new ArrayList<>();
-    public ArrayList<String> DataList2 = new ArrayList<>();
+    public ArrayList<String> weatherTemp = new ArrayList<>();
     public ArrayList<String> weatherMaxTemp = new ArrayList<>();
+    public ArrayList<String> weatherStatus = new ArrayList<>();
+    public ArrayList<String> weatherRain = new ArrayList<>();
+
 
 
     public NetworkManager(){
@@ -35,51 +38,25 @@ class NetworkManager extends Thread {
         super.run();
         Log.d("DOCUMENT", "################### NETWORKMANAGER THREAD RUN ###################");
 //        DataList = (ArrayList<String>) XmlParser.StartParsing(foodURL, "FOOD").clone();
-        DataList2 = (ArrayList<String>) XmlParser.StartParsing(weatherURL, "TODAYWEATHER").clone();
+        weatherTemp = (ArrayList<String>) XmlParser.StartParsing(weatherURL, "TODAYWEATHER").clone();
         weatherMaxTemp = (ArrayList<String>) XmlParser.StartParsing(weatherURL, "TODAYWEATHERMAX").clone();
+        weatherStatus = (ArrayList<String>) XmlParser.StartParsing(weatherURL, "TODAYWEATHERSTATUS").clone();
+        weatherRain = (ArrayList<String>) XmlParser.StartParsing(weatherURL, "TODAYWEATHERRAIN").clone();
 
-        try{
-//            Log.d("DOCUMENT", "############ 내가 원하는 값 ############" + String.valueOf(DataList.get(0)));
-            Log.d("DOCUMENT", "############ 내가 원하는 값 ############" + String.valueOf(DataList2.get(0)));
-        }catch(Exception e){
-            Log.d("DOCUMENT", "############ 응 안됨~ ############" + e.getMessage());
-        }
-        if(DataList2.isEmpty()){
-            Log.d("DOCUMENT", " 중 :삐었따!!!!!!!! 비었어!!!!!");
-        }else{
-            Log.d("DOCUMENT", " 중 : 만들어서 이미 채워 넣었음");
-        }
 
-        LoadingActivity.getDataList((ArrayList<String>) DataList2.clone());
+        LoadingActivity.getDataList((ArrayList<String>) weatherTemp.clone());
         LoadingActivity.getDataListMax((ArrayList<String>) weatherMaxTemp.clone());
+        LoadingActivity.getDataListStatus( (ArrayList<String>)weatherStatus.clone());
+        LoadingActivity.getDataListRain( (ArrayList<String>)weatherRain.clone());
         Log.d("DOCUMENT", "################### NETWORKMANAGER THREAD RUN 끝 ###################");
-
     }
 
     public String getFood(){
         // Algorithm 적용
         return "오늘의 밥";
     }
-
-
-    public String getWeather(){
-        return String.valueOf(DataList2.get(0));
-    }
-
     public String getFits(){
         return "옷";
-    }
-
-    public ArrayList<String> getDataList(){
-
-
-        try{
-            Log.d("DOCUMENT", "############ 내가 원하는 값 ############" + String.valueOf(DataList2.get(0)));
-        }catch(Exception e){
-            Log.d("DOCUMENT", "############ 응 안됨~ ############" + e.getMessage());
-        }
-
-        return (ArrayList<String>) this.DataList2.clone();
     }
 
     static public String getToday(){

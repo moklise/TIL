@@ -1,13 +1,16 @@
 package com.example.minseok.oncecheck;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,7 +22,9 @@ public class ScrollingActivity extends AppCompatActivity {
     TextView todayWeather;
     TextView todayWeatherSub;
     TextView todayClass;
+    ImageView todayWeatherImage;
     NetworkManager DataConnector;
+    BitmapDrawable weatherImg;
 
 
     @Override
@@ -27,8 +32,8 @@ public class ScrollingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
 
+        todayWeatherImage = (ImageView) findViewById(R.id.todayWeatherImage);
         todayWeather = (TextView) findViewById(R.id.todayWeatherText);
-        todayWeatherSub = (TextView) findViewById(R.id.todayWeatherTextSub);
         todayClass = (TextView) findViewById(R.id.todayClass);
         DataConnector  = new NetworkManager();
 
@@ -43,10 +48,26 @@ public class ScrollingActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         ArrayList<String> weather = bundle.getStringArrayList("weather");
         ArrayList<String> weatherMax = bundle.getStringArrayList("weatherMax");
+        ArrayList<String> weatherStatus = bundle.getStringArrayList("weatherStatus");
+        ArrayList<String> weatherRain = bundle.getStringArrayList("weatherRain");
 
-        todayWeather.setText("현재 온도는 " + weather.get(0) + "입니다. \n 오늘의 최고 기온은 : " + weatherMax.get(0) + "입니다.");
-        todayWeatherSub.setText("그냥 집에 계시는게 낫겠네요");
+        if( Integer.parseInt(weatherRain.get(0)) > 59 ){
+            weatherImg = (BitmapDrawable) getResources().getDrawable(R.drawable.rain);
+        }else{
+            weatherImg = (BitmapDrawable) getResources().getDrawable(R.drawable.sun);
+        }
+        todayWeatherImage.setImageDrawable(weatherImg);
 
+        String weatherString = "현재 온도는 " + weather.get(0) + "입니다.";
+
+        Log.d("DOCUMENT", weatherMax.get(0));
+
+        if( !weatherMax.get(0).equals("-999.0")) {
+            weatherString += "\n 오늘의 최고 기온은 " + weatherMax.get(0) + "입니다. ";
+        }
+        weatherString += "\n현재 강수 확률은 "+ weatherRain.get(0) +"입니다.";
+        weatherString += "\n그냥 집에 계시는게 낫겠네요";
+        todayWeather.setText(weatherString);
 
         todayClass.setText("기기");
 

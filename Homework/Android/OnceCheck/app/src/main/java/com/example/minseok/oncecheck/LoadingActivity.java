@@ -15,6 +15,8 @@ public class LoadingActivity extends Activity {
     NetworkManager DataConnector;
     static ArrayList<String> weatherTemp;
     static ArrayList<String> weatherMaxTemp;
+    static ArrayList<String> weatherStatus;
+    static ArrayList<String> weatherRain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,14 @@ public class LoadingActivity extends Activity {
         weatherMaxTemp = (ArrayList<String>) datalist.clone();
     }
 
+    static public void getDataListStatus(ArrayList<String> datalist){
+        weatherStatus = (ArrayList<String>) datalist.clone();
+    }
+
+    static public void getDataListRain(ArrayList<String> datalist){
+        weatherRain = (ArrayList<String>) datalist.clone();
+    }
+
     private void startLoading() {
         Handler handler = new Handler();
 
@@ -45,6 +55,9 @@ public class LoadingActivity extends Activity {
                     Intent intent = new Intent(getBaseContext(), ScrollingActivity.class);
                     intent.putStringArrayListExtra("weather", weatherTemp);
                     intent.putStringArrayListExtra("weatherMax", weatherMaxTemp);
+                    intent.putStringArrayListExtra("weatherStatus", weatherStatus);
+                    intent.putStringArrayListExtra("weatherRain", weatherRain);
+
 
                     startActivity(intent);
                     Log.d("DOCUMENT", "보내쨩");

@@ -94,6 +94,49 @@ public class XmlParser{
 //            case "tomorrowWeather":
 //                break;
 
+            case "TODAYWEATHERSTATUS":
+                switch (eventType) {
+
+                    case XmlPullParser.START_DOCUMENT:
+
+                        System.out.println("Start document");
+                        Log.d("MSTEST", "Start document");
+
+                        break;
+
+                    case XmlPullParser.START_TAG:
+                        if (parser.getName().equals("pty")) {
+                            parser.next();
+                            Log.d("DOCUMENT", parser.getText());
+                            return parser.getText();
+                        }
+
+                        break;
+                    default:
+                }
+                break;
+
+            case "TODAYWEATHERRAIN":
+                switch (eventType) {
+
+                    case XmlPullParser.START_DOCUMENT:
+
+                        System.out.println("Start document");
+                        Log.d("MSTEST", "Start document");
+
+                        break;
+
+                    case XmlPullParser.START_TAG:
+                        if (parser.getName().equals("reh")) {
+                            parser.next();
+                            Log.d("DOCUMENT", parser.getText());
+                            return String.valueOf(parser.getText());
+                        }
+
+                        break;
+                    default:
+                }
+                break;
             default:
 
         }
