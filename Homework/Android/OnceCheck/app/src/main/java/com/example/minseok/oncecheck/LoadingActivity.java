@@ -17,6 +17,7 @@ public class LoadingActivity extends Activity {
     static ArrayList<String> weatherMaxTemp;
     static ArrayList<String> weatherStatus;
     static ArrayList<String> weatherRain;
+    static int leftPart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,10 @@ public class LoadingActivity extends Activity {
         weatherRain = (ArrayList<String>) datalist.clone();
     }
 
+    static public void getNextDay(int _currentPart){
+        leftPart = _currentPart;
+    }
+
     private void startLoading() {
         Handler handler = new Handler();
 
@@ -57,17 +62,15 @@ public class LoadingActivity extends Activity {
                     intent.putStringArrayListExtra("weatherMax", weatherMaxTemp);
                     intent.putStringArrayListExtra("weatherStatus", weatherStatus);
                     intent.putStringArrayListExtra("weatherRain", weatherRain);
-
+                    intent.putExtra("leftPart", leftPart);
 
                     startActivity(intent);
-                    Log.d("DOCUMENT", "보내쨩");
-
                     finish();
                 }catch (Exception e){
                     Log.d("DOCUMENT", e.getMessage());
                 }
 
             }
-        }, 2000);
+        }, 5000);
     }
 }

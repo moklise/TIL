@@ -19,12 +19,20 @@ import java.util.ArrayList;
 public class ScrollingActivity extends AppCompatActivity {
 
 //    TextView todayWeather = (TextView) findViewById(R.id.todayWeatherText);
-    TextView todayWeather;
-    TextView todayWeatherSub;
-    TextView todayClass;
     ImageView todayWeatherImage;
+    TextView todayWeather;
+    ImageView tommorowWeatherImage;
+    TextView tomorrowWeather;
+    TextView todayFit;
+    ImageView todayFitImage;
+    ImageView todayFitImage2;
+    ImageView todayFitImage3;
+    TextView todayClass;
+
+    int leftDay = 0;
+
     NetworkManager DataConnector;
-    BitmapDrawable weatherImg;
+    BitmapDrawable imgBuffer;
 
 
     @Override
@@ -34,6 +42,12 @@ public class ScrollingActivity extends AppCompatActivity {
 
         todayWeatherImage = (ImageView) findViewById(R.id.todayWeatherImage);
         todayWeather = (TextView) findViewById(R.id.todayWeatherText);
+        tommorowWeatherImage = (ImageView) findViewById((R.id.tomorrowWeatherImage));
+        tomorrowWeather = (TextView) findViewById(R.id.tomorrowWeatherText);
+        todayFit = (TextView) findViewById(R.id.todayFitText);
+        todayFitImage = (ImageView) findViewById(R.id.todayFit);
+        todayFitImage2 = (ImageView) findViewById(R.id.todayFit2);
+        todayFitImage3 = (ImageView) findViewById(R.id.todayFit3);
         todayClass = (TextView) findViewById(R.id.todayClass);
         DataConnector  = new NetworkManager();
 
@@ -45,32 +59,101 @@ public class ScrollingActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(NetworkManager.getToday());
 
         // updateInfo();
+        // 오늘의 날씨
         Bundle bundle = getIntent().getExtras();
         ArrayList<String> weather = bundle.getStringArrayList("weather");
         ArrayList<String> weatherMax = bundle.getStringArrayList("weatherMax");
         ArrayList<String> weatherStatus = bundle.getStringArrayList("weatherStatus");
         ArrayList<String> weatherRain = bundle.getStringArrayList("weatherRain");
 
+        leftDay = bundle.getInt("leftPart");
+        // 오늘의 날씨
         if( Integer.parseInt(weatherRain.get(0)) > 59 ){
-            weatherImg = (BitmapDrawable) getResources().getDrawable(R.drawable.rain);
+            imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.rain);
         }else{
-            weatherImg = (BitmapDrawable) getResources().getDrawable(R.drawable.sun);
+            imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.sun);
         }
-        todayWeatherImage.setImageDrawable(weatherImg);
+        todayWeatherImage.setImageDrawable(imgBuffer);
 
         String weatherString = "현재 온도는 " + weather.get(0) + "입니다.";
-
-        Log.d("DOCUMENT", weatherMax.get(0));
-
         if( !weatherMax.get(0).equals("-999.0")) {
             weatherString += "\n 오늘의 최고 기온은 " + weatherMax.get(0) + "입니다. ";
         }
-        weatherString += "\n현재 강수 확률은 "+ weatherRain.get(0) +"입니다.";
+        weatherString += "\n현재 강수 확률은 "+ weatherRain.get(0) +"% 입니다.";
         weatherString += "\n그냥 집에 계시는게 낫겠네요";
         todayWeather.setText(weatherString);
 
-        todayClass.setText("기기");
+        // 내일의 날씨
+        if( Integer.parseInt(weatherRain.get(0)) > 59 ){
+            imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.rain);
+        }else{
+            imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.sun);
+        }
+        tommorowWeatherImage.setImageDrawable(imgBuffer);
 
+        weatherString = "";
+        if( !weatherMax.get(0).equals("-999.0")) {
+            weatherString = "내일의 최고기온은 " + weatherMax.get(leftDay+1) + "입니다.";
+        }
+        weatherString += "\n내일의 강수 확률은 "+ weatherRain.get(leftDay+1) +"% 입니다.";
+        tomorrowWeather.setText(weatherString);
+
+        double validTemp = 0;
+
+        for(int i = 0 ; i < leftDay + 8 ; i++){
+            if( !weatherMax.get(i).equals("-999.0")) {
+                validTemp = Double.valueOf(weatherMax.get(i));
+                break;
+            }
+        }
+
+            // 옷
+            if( validTemp > 27){
+                imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.tanktop);
+                todayFitImage.setImageDrawable(imgBuffer);
+                imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.longtanktop);
+                todayFitImage2.setImageDrawable(imgBuffer);
+                imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.shorts);
+                todayFitImage3.setImageDrawable(imgBuffer);
+                todayFit.setText("나시티, 반바지, 민소매 원피스가 적당하겠습니다 :)");
+            }else if( validTemp > 23){
+                imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.shirt1);
+                todayFitImage.setImageDrawable(imgBuffer);
+                imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.ga);
+                todayFitImage2.setImageDrawable(imgBuffer);
+                imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.pants);
+                todayFitImage3.setImageDrawable(imgBuffer);
+                todayFit.setText("긴팔티, 가디건, 후드티, 면바지, 슬랙스, 스키니 :)");
+            }else if( validTemp > 17){
+                imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.jacket);
+                todayFitImage.setImageDrawable(imgBuffer);
+                imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.hoodie);
+                todayFitImage2.setImageDrawable(imgBuffer);
+                imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.jeans);
+                todayFitImage3.setImageDrawable(imgBuffer);
+                todayFit.setText("니트, 가디건, 후드티, 맨투맨, 청바지");
+            }else if( validTemp > 12){
+                imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.jacket);
+                todayFitImage.setImageDrawable(imgBuffer);
+                imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.shirts);
+                todayFitImage2.setImageDrawable(imgBuffer);
+                imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.ga);
+                todayFitImage3.setImageDrawable(imgBuffer);
+                todayFit.setText("자켓, 셔츠, 가디건, 간절기 야상, 살색스타킹");
+            }else if( validTemp > 10){
+                imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.coat);
+                todayFitImage.setImageDrawable(imgBuffer);
+                todayFit.setText("트렌치코트, 간절기 야상, 여러겹 껴입기");
+            }else if( validTemp > 6){
+                imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.coat);
+                todayFitImage.setImageDrawable(imgBuffer);
+                todayFit.setText("코트, 가죽자켓이 적당하겠습니다 :)");
+            }else{
+                imgBuffer = (BitmapDrawable) getResources().getDrawable(R.drawable.neck);
+                todayFitImage.setImageDrawable(imgBuffer);
+                Log.d("DOCUMENT", weatherMax.get(0));
+                todayFit.setText("패딩, 목도리, 겨울야상이 적당하겠습니다 :)");
+            }
 
         // Floating Button 클릭시 Popup
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

@@ -19,6 +19,8 @@ import java.util.ArrayList;
  */
 
 public class XmlParser{
+    static public int partCounter = 0;
+    // tempMax의 첫 원소는 내일까지의 남은 파트이다.
 
     static public ArrayList<String> StartParsing(String url, String status) {
         String xml = downloadURL(url);
@@ -26,19 +28,12 @@ public class XmlParser{
     }
 
     // Status 가 food 일경우와 weather일 경우가 다르다
-    private static String CheckLine(XmlPullParser parser, int eventType, String status) throws IOException, XmlPullParserException {
+    private static String CheckLine(XmlPullParser parser, int eventType, String status, boolean partFlagStatus) throws IOException, XmlPullParserException {
         switch (status){
 
             // 학식
             case "FOOD":
                 switch (eventType){
-                    case XmlPullParser.START_DOCUMENT:
-
-                        System.out.println("Start document");
-                        Log.d("MSTEST", "Start document");
-
-                        break;
-
                     case XmlPullParser.START_TAG:
 
                         break;
@@ -48,14 +43,6 @@ public class XmlParser{
             // 오늘의 날씨
             case "TODAYWEATHER":
                 switch (eventType) {
-
-                    case XmlPullParser.START_DOCUMENT:
-
-                        System.out.println("Start document");
-                        Log.d("MSTEST", "Start document");
-
-                        break;
-
                     case XmlPullParser.START_TAG:
                         if (parser.getName().equals("temp")) {
                             parser.next();
@@ -70,19 +57,22 @@ public class XmlParser{
 
             case "TODAYWEATHERMAX":
                 switch (eventType) {
-
-                    case XmlPullParser.START_DOCUMENT:
-
-                        System.out.println("Start document");
-                        Log.d("MSTEST", "Start document");
-
-                        break;
-
                     case XmlPullParser.START_TAG:
                         if (parser.getName().equals("tmx")) {
                             parser.next();
                             Log.d("DOCUMENT", parser.getText());
                             return parser.getText();
+                        }
+
+                        if ( parser.getName().equals("day") && !partFlagStatus){
+                            parser.next();
+                            if(Integer.parseInt(parser.getText()) == 0){
+                                partCounter++;
+                            }else{
+                                LoadingActivity.getNextDay(partCounter);
+                            }
+
+                            Log.d("Document", String.valueOf(partCounter));
                         }
 
                         break;
@@ -157,8 +147,9 @@ public class XmlParser{
             // 여기까지 의미있는부분을 짤라준다.
             int eventType = parser.getEventType();
             String buffer;
+            boolean partCounter = false;
             while (eventType != XmlPullParser.END_DOCUMENT) {
-                buffer = CheckLine(parser, eventType, status);
+                buffer = CheckLine(parser, eventType, status, partCounter);
                 if(!(buffer).equals("")){
                     tempDataList.add(buffer);
                 }
