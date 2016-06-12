@@ -28,6 +28,7 @@ public class ScrollingActivity extends AppCompatActivity {
     ImageView todayFitImage2;
     ImageView todayFitImage3;
     TextView todayClass;
+    DBManager dbHelper;
 
     int leftDay = 0;
 
@@ -40,6 +41,7 @@ public class ScrollingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
 
+        dbHelper = new DBManager(this);
         todayWeatherImage = (ImageView) findViewById(R.id.todayWeatherImage);
         todayWeather = (TextView) findViewById(R.id.todayWeatherText);
         tommorowWeatherImage = (ImageView) findViewById((R.id.tomorrowWeatherImage));
@@ -154,6 +156,9 @@ public class ScrollingActivity extends AppCompatActivity {
                 Log.d("DOCUMENT", weatherMax.get(0));
                 todayFit.setText("패딩, 목도리, 겨울야상이 적당하겠습니다 :)");
             }
+
+        todayClass = (TextView) findViewById(R.id.todayClass);
+        todayClass.setText(dbHelper.c_printData());
 
         // Floating Button 클릭시 Popup
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

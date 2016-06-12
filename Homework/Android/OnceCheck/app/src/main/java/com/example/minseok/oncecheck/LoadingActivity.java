@@ -19,34 +19,30 @@ public class LoadingActivity extends Activity {
     static ArrayList<String> weatherRain;
     static int leftPart;
 
+    DBManager dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
         DataConnector = new NetworkManager();
         DataConnector.start();
+
+        dbHelper = new DBManager(this);
+        Intent initializeIntent = new Intent(getBaseContext(), InitializerActivity.class);
+
+        if(dbHelper.b_select("initialized").equals("")){
+            startActivityForResult(initializeIntent, 0000);
+        }else{
+            startLoading();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
         startLoading();
-    }
-
-    static public void getDataList(ArrayList<String> datalist){
-        weatherTemp = (ArrayList<String>) datalist.clone();
-        Log.d("DOCUMENT", "뱡뱡뱡뱡뱡뱌뱌뱌뱌뱝" + weatherTemp.get(0));
-    }
-
-    static public void getDataListMax(ArrayList<String> datalist){
-        weatherMaxTemp = (ArrayList<String>) datalist.clone();
-    }
-
-    static public void getDataListStatus(ArrayList<String> datalist){
-        weatherStatus = (ArrayList<String>) datalist.clone();
-    }
-
-    static public void getDataListRain(ArrayList<String> datalist){
-        weatherRain = (ArrayList<String>) datalist.clone();
-    }
-
-    static public void getNextDay(int _currentPart){
-        leftPart = _currentPart;
     }
 
     private void startLoading() {
@@ -72,5 +68,26 @@ public class LoadingActivity extends Activity {
 
             }
         }, 5000);
+    }
+
+    static public void getDataList(ArrayList<String> datalist){
+        weatherTemp = (ArrayList<String>) datalist.clone();
+        Log.d("DOCUMENT", "뱡뱡뱡뱡뱡뱌뱌뱌뱌뱝" + weatherTemp.get(0));
+    }
+
+    static public void getDataListMax(ArrayList<String> datalist){
+        weatherMaxTemp = (ArrayList<String>) datalist.clone();
+    }
+
+    static public void getDataListStatus(ArrayList<String> datalist){
+        weatherStatus = (ArrayList<String>) datalist.clone();
+    }
+
+    static public void getDataListRain(ArrayList<String> datalist){
+        weatherRain = (ArrayList<String>) datalist.clone();
+    }
+
+    static public void getNextDay(int _currentPart){
+        leftPart = _currentPart;
     }
 }
