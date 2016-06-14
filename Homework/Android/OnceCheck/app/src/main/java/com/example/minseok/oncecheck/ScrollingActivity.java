@@ -160,13 +160,16 @@ public class ScrollingActivity extends AppCompatActivity {
         todayClass = (TextView) findViewById(R.id.todayClass);
         todayClass.setText(dbHelper.c_printData());
 
+
         // Floating Button 클릭시 Popup
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "그렇습니다", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "내일 할일 [ " + " ]을 추가하였습니다.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                //intent로 새 액티비티 보내기
             }
         });
     }
