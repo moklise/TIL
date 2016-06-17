@@ -15,6 +15,6 @@
 // INT : Skill Damage
 // DEX : Rate of hit, avoidance
 enum class Ability { STR = 0, INT, DEX };
-enum class Action { Attack = 0, Defense, Rest, };
+enum class Action { Attack = 0, Defense, Rest };
 
 #endif /* Event_hpp */

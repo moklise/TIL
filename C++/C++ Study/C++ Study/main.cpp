@@ -18,12 +18,12 @@ int main(int argc, const char * argv[]) {
     customPlayer A;
     PlayerManager((PlayerManager)A);
     
-//    Battle.battle(myPlayer, yourPlayer);
-    
-    
-    Battle::battle(myPlayer, yourPlayer);
-    
     myPlayer.getInfo();
+    
+    Battle newBattle(myPlayer, yourPlayer);
+    newBattle.start(myPlayer, yourPlayer);
+    
+//    myPlayer.getInfo();
     return 0;
 }
 

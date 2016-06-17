@@ -89,8 +89,17 @@ void PlayerManager::getInfo() const
         << " INT : " << INT << std::endl;
 }
 
-Action selectAction(const PlayerManager& opponent)
+
+Action PlayerManager::selectAction(const PlayerManager& opponent)
 {
+    // 플레이어 기본 패턴
+    return Action::Attack;
+}
+
+Action customPlayer::selectAction(const PlayerManager& opponent)
+{
+    // 커스텀 플레이 패턴
+    // Input your pattern
     
     return Action::Attack;
 }

@@ -10,16 +10,18 @@
 #define Battle_hpp
 #include <iostream>
 #include "PlayerManager.hpp"
+#include "Event.hpp"
 
 class Battle{
     PlayerManager player_1;
     PlayerManager player_2;
-    
-    
+
 public:
-    Battle(PlayerManager&& one, PlayerManager&& two);
-    void setFirst(PlayerManager&& one, PlayerManager&& two);
-    static void battle(PlayerManager& one, PlayerManager& two);
+    Battle(PlayerManager& one, PlayerManager& two);
+    void setFirst(PlayerManager& one, PlayerManager& two);
+    void jugde(PlayerManager& one, Action one_status, PlayerManager& two, Action two_status);
+    bool battle(PlayerManager& one, PlayerManager& two);
+    void start(PlayerManager& one, PlayerManager& two);
 };
 
 #endif /* Battle_hpp */

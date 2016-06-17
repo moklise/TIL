@@ -10,6 +10,7 @@
 #define PlayerManager_hpp
 
 #include <stdio.h>
+#include "Event.hpp"
 
 class customPlayer;
 class PlayerManager
@@ -41,9 +42,7 @@ public:
 
 class customPlayer : public PlayerManager
 {
-    
-    
-    
+    Action selectAction(const PlayerManager& opponent);
 };
 
 
