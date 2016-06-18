@@ -25,7 +25,8 @@ private:
 public:
     PlayerManager();
     PlayerManager(std::string _name, int _HP, int _STR, int _DEX, int _INT);
-        PlayerManager(const customPlayer& _man);
+    PlayerManager(const customPlayer& _man);
+    
     PlayerManager& operator=(const PlayerManager& _subject);
     
     std::string getName() const;
@@ -34,9 +35,12 @@ public:
     int getDEX() const;
     int getINT() const;
     
-    int getDamage() const;
+    int hit() const;
+    void getDamage(int _damage);
+    void getRest();
     int getAvoidance() const;
     void getInfo() const;
+    
     virtual Action selectAction(const PlayerManager& opponent);
 };
 

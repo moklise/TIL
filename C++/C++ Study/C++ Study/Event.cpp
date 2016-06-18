@@ -7,3 +7,8 @@
 //
 
 #include "Event.hpp"
+
+void Event::ConsoleDelay()
+{
+    usleep(1000 * 800);
+}

@@ -12,17 +12,23 @@
 
 int main(int argc, const char * argv[]) {
     
-    PlayerManager myPlayer("minseok", 1, 1, 1, 1);
-    PlayerManager yourPlayer("mm", 2, 2, 2, 2);
+    PlayerManager myPlayer("minseok", 100, 5, 3, 3);
+    PlayerManager yourPlayer("mm", 100, 10, 1, 3);
     
     customPlayer A;
     PlayerManager((PlayerManager)A);
     
     myPlayer.getInfo();
+    yourPlayer.getInfo();
+    
+    std::cout << std::endl;
+    
+    std::cout << "########### Battle Start ###########" << std::endl;
     
     Battle newBattle(myPlayer, yourPlayer);
     newBattle.start(myPlayer, yourPlayer);
     
+    std::cout << "########### Battle end ###########" << std::endl;
 //    myPlayer.getInfo();
     return 0;
 }

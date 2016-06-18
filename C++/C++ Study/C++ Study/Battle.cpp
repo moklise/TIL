@@ -24,7 +24,7 @@ void Battle::start(PlayerManager& one, PlayerManager& two)
         std::cout << "player 1 wins" << std::endl;
     }else
     {
-        std::cout << "player 2 winds" << std::endl;
+        std::cout << "player 2 wins" << std::endl;
     }
     
 }
@@ -32,19 +32,23 @@ void Battle::start(PlayerManager& one, PlayerManager& two)
 bool Battle::battle(PlayerManager& one, PlayerManager& two)
 {
     // Do Battle
-    // 서로 상태 받고 판단 - 행동 반복
-    int i = 0;
-    while(i++ > 10)
+    // 판단 - 행동 반복
+    while(1)
     {
-        // event
+        // 선공
         jugde(one, one.selectAction(two), two, two.selectAction(one));
+        std::cout << "[" << one.getName() << "] " << one.getHP() << std::endl;
+        std::cout << "[" << two.getName() << "] " << two.getHP() << std::endl << std::endl;
+        std::cout << std::endl;
+        std::cout << "##########################" << std::endl << std::endl;
+        
+        if( one.getHP() < 1 ) return true;
+        else if( two.getHP() < 1) return false;
     }
-    
     //    std::cout << one.getName() << " attacks " << two.getName() << " with " << damage << " damage(s)." << std::endl;
-    
-    return 1;
 }
 
+// 이제 Avoidance를 추가해줄 차례
 
 void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Action two_status)
 {
@@ -52,42 +56,54 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
     switch (one_status) {
         case Action::Attack :
             // 나 공격
-            
+            std::cout << one.getName() << " 공격 "<< std::endl;
+            Event::ConsoleDelay();
             switch (two_status) {
                 case Action::Attack:
                     // 상대 공격
-                    std::cout << "나는 공격했지만 상대도 공격했다." << std::endl;
+                    std::cout << two.getName() << " 공격 " << std::endl;
+                    Event::ConsoleDelay();
+                    two.getDamage(one.hit());
+                    one.getDamage(two.hit());
                     break;
             
                 case Action::Defense:
                     // 상대 방어
-                    std::cout << "나는 공격했지만 상대는 막았다." << std::endl;
+                    std::cout << two.getName() << " 방어 " << std::endl;
+                    Event::ConsoleDelay();
                     break;
                     
                 case Action::Rest:
                     // 상대 휴식
-                    std::cout << "나는 공격했지만 상대은 휴식을 취했다." << std::endl;
+                    std::cout << two.getName() << " 휴식 " << std::endl;
+                    Event::ConsoleDelay();
+                    two.getDamage(one.hit());
                     break;
             }
             break;
             
         case Action::Defense :
             // 나 방어
-            
+            std::cout << one.getName() << " 방어 "<< std::endl;
+            Event::ConsoleDelay();
             switch (two_status) {
                 case Action::Attack:
                     // 상대 공격
-                    std::cout << "나는 방어했지만 상대는 공격했다." << std::endl;
+                    
+                    std::cout << two.getName() << " 공격 " << std::endl;
+                    Event::ConsoleDelay();
                     break;
                     
                 case Action::Defense:
                     // 상대 방어
-                    std::cout << "나는 막았고 상대도 막았다." << std::endl;
+                    std::cout << two.getName() << " 방어 " << std::endl;
+                    Event::ConsoleDelay();
                     break;
                     
                 case Action::Rest:
                     // 상대 휴식
-                    std::cout << "나는 막았지만 상대은 휴식을 취했다." << std::endl;
+                    std::cout << two.getName() << " 휴식 " << std::endl;
+                    Event::ConsoleDelay();
                     break;
             }
             break;
@@ -97,17 +113,20 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
             switch (two_status) {
                 case Action::Attack:
                     // 상대 공격
-                    std::cout << "나는 휴식을 취했지만 상대는 공격했다." << std::endl;
+                    std::cout << " 휴식 : 공격 " << std::endl;
+                    Event::ConsoleDelay();
                     break;
                     
                 case Action::Defense:
                     // 상대 방어
-                    std::cout << "나는 휴식을 취했지만 상대는 막았다." << std::endl;
+                    std::cout << " 휴식 : 방어 " << std::endl;
+                    Event::ConsoleDelay();
                     break;
                     
                 case Action::Rest:
                     // 상대 휴식
-                    std::cout << "나는 휴식을 취했지만 상대은 휴식을 취했다." << std::endl;
+                    std::cout << " 휴식 : 휴식 " << std::endl;
+                    Event::ConsoleDelay();
                     break;
             }
             break;

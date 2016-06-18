@@ -9,6 +9,7 @@
 #ifndef Event_hpp
 #define Event_hpp
 #include <iostream>
+#include <unistd.h>
 
 // Ability : 능력치에 대한 Enum
 // STR : Damage
@@ -16,5 +17,10 @@
 // DEX : Rate of hit, avoidance
 enum class Ability { STR = 0, INT, DEX };
 enum class Action { Attack = 0, Defense, Rest };
+
+typedef struct{
+    static void ConsoleDelay();    
+}Event;
+
 
 #endif /* Event_hpp */

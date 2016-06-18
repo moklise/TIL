@@ -69,9 +69,21 @@ PlayerManager& PlayerManager::operator=(const PlayerManager& _subject)
     return *this;
 }
 
-int PlayerManager::getDamage() const
+int PlayerManager::hit() const
 {
     return STR*DEX;
+}
+
+void PlayerManager::getDamage(int _damage)
+{
+    std::cout << this->getName() << " got " << _damage << " damages! " << std::endl;
+    HP -= _damage;
+    Event::ConsoleDelay();
+}
+
+void PlayerManager::getRest()
+{
+    HP += 10;
 }
 
 int PlayerManager::getAvoidance() const
@@ -82,17 +94,17 @@ int PlayerManager::getAvoidance() const
 void PlayerManager::getInfo() const
 {
     std::cout
-        << "Name : " << name
+        << " Name : " << name
         << " HP : " << HP
         << " STR : " << STR
         << " DEX : " << DEX
         << " INT : " << INT << std::endl;
 }
 
-
 Action PlayerManager::selectAction(const PlayerManager& opponent)
 {
     // 플레이어 기본 패턴
+    
     return Action::Attack;
 }
 
