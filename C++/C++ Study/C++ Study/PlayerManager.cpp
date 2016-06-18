@@ -6,14 +6,12 @@
 //  Copyright © 2016년 민석. All rights reserved.
 //
 
-#include <iostream>
 #include "PlayerManager.hpp"
-#include "Event.hpp"
 
 PlayerManager::PlayerManager()
 {}
 
-PlayerManager::PlayerManager(const customPlayer& _man)
+PlayerManager::PlayerManager(const CustomPlayer& _man)
 {
     this->name = _man.getName();
     this->HP   = _man.getHP();
@@ -71,19 +69,23 @@ PlayerManager& PlayerManager::operator=(const PlayerManager& _subject)
 
 int PlayerManager::hit() const
 {
-    return STR*DEX;
+    const int additional = rand() % STR+DEX;
+    
+    return ((double)(STR*0.7)*(double)(DEX*0.3))*2 + additional;
 }
 
-void PlayerManager::getDamage(int _damage)
+void PlayerManager::getDamage(const int _damage, const std::string opponent_name)
 {
-    std::cout << this->getName() << " got " << _damage << " damages! " << std::endl;
+    std::cout << opponent_name << " attacks with " << _damage << " damages! " << std::endl;
     HP -= _damage;
     Event::ConsoleDelay();
 }
 
 void PlayerManager::getRest()
 {
-    HP += 10;
+    HP += 5;
+    std::cout << this->getName() << " got 5 HPs! " << std::endl;
+    Event::ConsoleDelay();
 }
 
 bool PlayerManager::getAvoidance() const
@@ -110,11 +112,24 @@ void PlayerManager::getInfo() const
 Action PlayerManager::selectAction(const PlayerManager& opponent)
 {
     // 플레이어 기본 패턴
+    int randSelector = rand() % 3;
     
-    return Action::Attack;
+    switch (randSelector) {
+        case 1:
+            return Action::Attack;
+            break;
+            
+        case 2:
+            return Action::Defense;
+            break;
+            
+        default:
+            return Action::Rest;
+            break;
+    }
 }
 
-Action customPlayer::selectAction(const PlayerManager& opponent)
+Action CustomPlayer::selectAction(const PlayerManager& opponent)
 {
     // 커스텀 플레이 패턴
     // Input your pattern

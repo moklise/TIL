@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "Event.hpp"
 
-class customPlayer;
+class CustomPlayer;
 class PlayerManager
 {
 private:
@@ -25,7 +25,7 @@ private:
 public:
     PlayerManager();
     PlayerManager(std::string _name, int _HP, int _STR, int _DEX, int _INT);
-    PlayerManager(const customPlayer& _man);
+    PlayerManager(const CustomPlayer& _man);
     
     PlayerManager& operator=(const PlayerManager& _subject);
     
@@ -36,7 +36,7 @@ public:
     int getINT() const;
     
     int hit() const;
-    void getDamage(int _damage);
+    void getDamage(int _damage, std::string opponent_name);
     void getRest();
     bool getAvoidance() const;
     void getInfo() const;
@@ -44,10 +44,9 @@ public:
     virtual Action selectAction(const PlayerManager& opponent);
 };
 
-class customPlayer : public PlayerManager
+class CustomPlayer : public PlayerManager
 {
     Action selectAction(const PlayerManager& opponent);
 };
-
 
 #endif /* PlayerManager_hpp */
