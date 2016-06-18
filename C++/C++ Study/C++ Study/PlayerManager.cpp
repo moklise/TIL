@@ -86,9 +86,15 @@ void PlayerManager::getRest()
     HP += 10;
 }
 
-int PlayerManager::getAvoidance() const
+bool PlayerManager::getAvoidance() const
 {
-    return DEX;
+    const int rate = 20 + 5 * DEX;
+    
+    if((rand()*100) <= rate)
+    {
+        return true;
+    }
+    return false;
 }
 
 void PlayerManager::getInfo() const

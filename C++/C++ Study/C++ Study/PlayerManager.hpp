@@ -38,7 +38,7 @@ public:
     int hit() const;
     void getDamage(int _damage);
     void getRest();
-    int getAvoidance() const;
+    bool getAvoidance() const;
     void getInfo() const;
     
     virtual Action selectAction(const PlayerManager& opponent);

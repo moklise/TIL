@@ -70,6 +70,12 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                 case Action::Defense:
                     // 상대 방어
                     std::cout << two.getName() << " 방어 " << std::endl;
+                    
+                    if(two.getAvoidance())
+                        std::cout << two.getName() << "이(가) 회피했다!" << std::endl;
+                    else
+                        two.getDamage(one.hit());
+                    
                     Event::ConsoleDelay();
                     break;
                     
@@ -89,9 +95,14 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
             switch (two_status) {
                 case Action::Attack:
                     // 상대 공격
-                    
                     std::cout << two.getName() << " 공격 " << std::endl;
                     Event::ConsoleDelay();
+                    
+                    if(one.getAvoidance())
+                        std::cout << one.getName() << "이(가) 회피했다!" << std::endl;
+                    else
+                        one.getDamage(two.hit());
+                    
                     break;
                     
                 case Action::Defense:
