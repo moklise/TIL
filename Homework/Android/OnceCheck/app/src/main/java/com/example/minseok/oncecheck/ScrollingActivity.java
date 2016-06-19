@@ -82,8 +82,24 @@ public class ScrollingActivity extends AppCompatActivity {
             weatherString += "\n 오늘의 최고 기온은 " + weatherMax.get(0) + "입니다. ";
         }
         weatherString += "\n현재 강수 확률은 "+ weatherRain.get(0) +"% 입니다.";
-        weatherString += "\n그냥 집에 계시는게 낫겠네요";
+        
+        if(weather.get(0) > 30)
+        {
+            weatherString += "\n더우니 그냥 집에 계시는게 낫겠네요";    
+        }
+        else if(weather.get(0) > 20)
+        {
+            weatherString += "\n놀러다니기 좋은 날씨네요";
+        }else if(weather.get(0) > 10)
+        {
+            weatherString += "\n놀러다니기 좋은 날씨네요";
+        }else{
+            weatherString += "\n너무 추으니 그냥 집에 계시는게 낫겠네요";
+        }
+
+        
         todayWeather.setText(weatherString);
+
 
         // 내일의 날씨
         if( Integer.parseInt(weatherRain.get(0)) > 59 ){
