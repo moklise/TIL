@@ -12,11 +12,14 @@
 
 int main(int argc, const char * argv[]) {
     
-    PlayerManager myPlayer("Player1", 100, 8, 1, 1);
-    PlayerManager yourPlayer("Player2", 100, 2, 7, 1);
+//    PlayerManager myPlayer("Player1", 100, 8, 1, 1);
+//    PlayerManager yourPlayer("Player2", 100, 2, 7, 1);
     
-    CustomPlayer A;
-    PlayerManager((PlayerManager)A);
+    CustomPlayer myPlayer("Player1", 100, 50, 5, 4, 1);
+    CustomPlayer yourPlayer("Player2", 100, 50, 2, 7, 1);
+    
+//    CustomPlayer A;
+//    PlayerManager((PlayerManager)A);
     
     myPlayer.getInfo();
     yourPlayer.getInfo();

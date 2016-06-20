@@ -18,19 +18,21 @@ class PlayerManager
 private:
     std::string name;
     int HP;
+    int MP;
     int STR;
     int DEX;
     int INT;
     
 public:
     PlayerManager();
-    PlayerManager(std::string _name, int _HP, int _STR, int _DEX, int _INT);
+    PlayerManager(std::string _name, int _HP, int _MP, int _STR, int _DEX, int _INT);
     PlayerManager(const CustomPlayer& _man);
     
     PlayerManager& operator=(const PlayerManager& _subject);
     
     std::string getName() const;
     int getHP() const;
+    int getMP() const;
     int getSTR() const;
     int getDEX() const;
     int getINT() const;
@@ -46,6 +48,9 @@ public:
 
 class CustomPlayer : public PlayerManager
 {
+public:
+    CustomPlayer(std::string _name, int _HP, int _MP, int _STR, int _DEX, int _INT);
+    
     Action selectAction(const PlayerManager& opponent);
 };
 

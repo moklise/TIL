@@ -8,7 +8,6 @@
 
 #include "Battle.hpp"
 
-
 Battle::Battle(PlayerManager& one, PlayerManager& two)
 {
 //    setFirst(std::move(one), std::move(two));
@@ -31,11 +30,10 @@ void Battle::start(PlayerManager& one, PlayerManager& two)
 
 bool Battle::battle(PlayerManager& one, PlayerManager& two)
 {
-    // Do Battle
     // 판단 - 행동 반복
     while(1)
     {
-        // 선공
+    
         jugde(one, one.selectAction(two), two, two.selectAction(one));
         
         Event::ConsoleDelay();
@@ -52,14 +50,19 @@ bool Battle::battle(PlayerManager& one, PlayerManager& two)
 
 void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Action two_status)
 {
+    
     // 대상의 행동
     switch (one_status) {
+            
         case Action::Attack :
+            
             // 나 공격
             std::cout << one.getName() << " 공격 "<< std::endl;
             Event::ConsoleDelay();
+            
             switch (two_status) {
                 case Action::Attack:
+                    
                     // 상대 공격
                     std::cout << two.getName() << " 공격 " << std::endl;
                     Event::ConsoleDelay();
@@ -68,6 +71,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                     break;
             
                 case Action::Defense:
+                    
                     // 상대 방어
                     std::cout << two.getName() << " 방어 " << std::endl;
                     
@@ -79,13 +83,20 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                     Event::ConsoleDelay();
                     break;
                     
+                case Action::Skill:
+                    
+                    // 상대 스킬
+                    
+                    Event::ConsoleDelay();
+                    break;
+                    
                 case Action::Rest:
+                    
                     // 상대 휴식
                     std::cout << two.getName() << " 휴식 " << std::endl;
                     Event::ConsoleDelay();
                     
                     two.getDamage(one.hit(), one.getName());
-                    
                     two.getRest();
                     
                     break;
@@ -93,11 +104,13 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
             break;
             
         case Action::Defense :
+            
             // 나 방어
             std::cout << one.getName() << " 방어 "<< std::endl;
             Event::ConsoleDelay();
             switch (two_status) {
                 case Action::Attack:
+                    
                     // 상대 공격
                     std::cout << two.getName() << " 공격 " << std::endl;
                     Event::ConsoleDelay();
@@ -110,6 +123,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                     break;
                     
                 case Action::Defense:
+                    
                     // 상대 방어
                     std::cout << two.getName() << " 방어 " << std::endl;
                     Event::ConsoleDelay();
@@ -119,7 +133,14 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                     
                     break;
                     
+                case Action::Skill:
+                    
+                    // 상대 스킬
+                    Event::ConsoleDelay();
+                    break;
+                    
                 case Action::Rest:
+                    
                     // 상대 휴식
                     std::cout << two.getName() << " 휴식 " << std::endl;
                     Event::ConsoleDelay();
@@ -134,10 +155,13 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
             break;
             
         case Action::Rest :
+            
             // 나 휴식
             std::cout << one.getName() << " 휴식 " << std::endl;
+            
             switch (two_status) {
                 case Action::Attack:
+                    
                     // 상대 공격
                     std::cout << two.getName() << " 공격 " << std::endl;
                     Event::ConsoleDelay();
@@ -149,6 +173,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                     break;
                     
                 case Action::Defense:
+                    
                     // 상대 방어
                     std::cout << two.getName() << " 방어 " << std::endl;
                     Event::ConsoleDelay();
@@ -160,7 +185,15 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                     
                     break;
                     
+                case Action::Skill:
+                    
+                    // 상대 스킬
+                    
+                    Event::ConsoleDelay();
+                    break;
+                    
                 case Action::Rest:
+                    
                     // 상대 휴식
                     std::cout << two.getName() << " 휴식 " << std::endl;
                     Event::ConsoleDelay();
@@ -173,9 +206,51 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
             }
             break;
             
-        default:
+        case Action::Skill :
             
-            // 상대방의 행동
+            // 스킬
+            std::cout << one.getName() << " 스킬 " << std::endl;
+            
+            switch (two_status) {
+                case Action::Attack :
+                    
+                    // 상대 공격
+                    std::cout << two.getName() << " 공격 " << std::endl;
+                    Event::ConsoleDelay();
+                    
+                    Event::ConsoleDelay();
+                    break;
+                    
+                case Action::Defense :
+                    
+                    // 상대 방어
+                    std::cout << two.getName() << " 방어 " << std::endl;
+                    Event::ConsoleDelay();
+                    
+                    Event::ConsoleDelay();
+                    
+                    break;
+                    
+                case Action::Skill :
+                    
+                    // 상대 스킬
+                    
+                    Event::ConsoleDelay();
+                    break;
+                    
+                case Action::Rest :
+                    
+                    // 상대 휴식
+                    std::cout << two.getName() << " 휴식 " << std::endl;
+                    Event::ConsoleDelay();
+                    
+                    
+                    Event::ConsoleDelay();
+                    break;
+            }
+            break;
+            
+        default:
             break;
     }
 }
@@ -187,13 +262,9 @@ void Battle::setFirst(PlayerManager& one, PlayerManager& two)
 
     if(one_coin > two_coin)
     {
-//        player_1 = std::move(one);
-//        player_2 = std::move(two);
         player_1 = one;
         player_2 = two;
     }else{
-//        player_1 = std::move(two);
-//        player_2 = std::move(one);
         player_1 = two;
         player_2 = one;
     }

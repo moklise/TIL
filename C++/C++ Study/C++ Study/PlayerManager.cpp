@@ -9,22 +9,36 @@
 #include "PlayerManager.hpp"
 
 PlayerManager::PlayerManager()
-{}
+{
+    this->name = "NONAME";
+}
 
 PlayerManager::PlayerManager(const CustomPlayer& _man)
 {
     this->name = _man.getName();
     this->HP   = _man.getHP();
+    this->MP   = _man.getMP();
     this->STR  = _man.getSTR();
     this->DEX  = _man.getDEX();
     this->INT  = _man.getINT();
 }
 
 
-PlayerManager::PlayerManager(std::string _name, int _HP, int _STR, int _DEX, int _INT)
+PlayerManager::PlayerManager(std::string _name, int _HP, int _MP, int _STR, int _DEX, int _INT)
 {
+    int sumState = _STR + _DEX + _INT;
+    if(sumState > 10)
+    {
+        std::cout << "경고!! " + _name + "의 스탯이 비정상적입니다. " << std::endl;
+        exit(1);
+    }
+    else if(sumState < 10)
+    {
+        std::cout << "경고!! " + _name + "의 스텟을 모두 분배하지 않았습니다. " << std::endl;
+    }
     this->name = _name;
     this->HP   = _HP;
+    this->MP   = _MP;
     this->STR  = _STR;
     this->DEX  = _DEX;
     this->INT  = _INT;
@@ -38,6 +52,11 @@ std::string PlayerManager::getName() const
 int PlayerManager::getHP() const
 {
     return HP;
+}
+
+int PlayerManager::getMP() const
+{
+    return MP;
 }
 
 int PlayerManager::getSTR() const
@@ -76,7 +95,7 @@ int PlayerManager::hit() const
 
 void PlayerManager::getDamage(const int _damage, const std::string opponent_name)
 {
-    std::cout << opponent_name << " attacks with " << _damage << " damages! " << std::endl;
+    std::cout << opponent_name << " 가 " << _damage << " 데미지를 가했다! " << std::endl;
     HP -= _damage;
     Event::ConsoleDelay();
 }
@@ -84,7 +103,7 @@ void PlayerManager::getDamage(const int _damage, const std::string opponent_name
 void PlayerManager::getRest()
 {
     HP += 5;
-    std::cout << this->getName() << " got 5 HPs! " << std::endl;
+    std::cout << this->getName() << "는(은) 5HP를 회복했다!" << std::endl;
     Event::ConsoleDelay();
 }
 
@@ -104,6 +123,7 @@ void PlayerManager::getInfo() const
     std::cout
         << " Name : " << name
         << " HP : " << HP
+        << " MP : " << MP
         << " STR : " << STR
         << " DEX : " << DEX
         << " INT : " << INT << std::endl;
@@ -112,7 +132,7 @@ void PlayerManager::getInfo() const
 Action PlayerManager::selectAction(const PlayerManager& opponent)
 {
     // 플레이어 기본 패턴
-    int randSelector = rand() % 3;
+    int randSelector = rand() % 4;
     
     switch (randSelector) {
         case 1:
@@ -123,11 +143,19 @@ Action PlayerManager::selectAction(const PlayerManager& opponent)
             return Action::Defense;
             break;
             
+        case 3:
+            return Action::Skill;
+            break;
+            
         default:
             return Action::Rest;
             break;
     }
 }
+
+CustomPlayer::CustomPlayer(std::string _name, int _HP, int _MP, int _STR, int _DEX, int _INT)
+    :PlayerManager(_name, _HP, _MP, _STR, _DEX, _INT)
+{ }
 
 Action CustomPlayer::selectAction(const PlayerManager& opponent)
 {
