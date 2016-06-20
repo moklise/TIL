@@ -12,3 +12,9 @@ void Event::ConsoleDelay()
 {
     usleep(1000 * 800);
 }
+
+bool Event::isDead(int _HP)
+{
+    if(_HP > 0) return true;
+    else        return false;
+}

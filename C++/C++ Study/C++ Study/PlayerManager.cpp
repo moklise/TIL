@@ -102,8 +102,20 @@ void PlayerManager::getDamage(const int _damage, const std::string opponent_name
 
 void PlayerManager::getRest()
 {
-    HP += 5;
-    std::cout << this->getName() << "는(은) 5HP를 회복했다!" << std::endl;
+    if( HP == 100 )
+    {
+        std::cout << this->getName() << "는(은) 휴식을 취했지만 아무일도 없었다." << std::endl;
+    }
+    else if( HP > 95 )
+    {
+        std::cout << this->getName() << "는(은) " << 100 - HP << "HP를 회복했다!" << std::endl;
+        HP = 100;
+    }
+    else
+    {
+        HP += 5;
+        std::cout << this->getName() << "는(은) 5HP를 회복했다!" << std::endl;
+    }
     Event::ConsoleDelay();
 }
 
@@ -132,23 +144,25 @@ void PlayerManager::getInfo() const
 Action PlayerManager::selectAction(const PlayerManager& opponent)
 {
     // 플레이어 기본 패턴
-    int randSelector = rand() % 4;
+    int randSelector = rand() % 3;
     
     switch (randSelector) {
-        case 1:
+        case 0:
             return Action::Attack;
             break;
             
-        case 2:
+        case 1:
             return Action::Defense;
             break;
             
-        case 3:
-            return Action::Skill;
+        case 2:
+//            return Action::Skill;
+            return Action::Rest;
             break;
             
         default:
-            return Action::Rest;
+//            return Action::Rest;
+            return Action::Skill;
             break;
     }
 }

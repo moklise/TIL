@@ -14,9 +14,9 @@ Battle::Battle(PlayerManager& one, PlayerManager& two)
     setFirst(one, two);
 }
 
-void Battle::start(PlayerManager& one, PlayerManager& two)
+void Battle::start()
 {
-    bool result = battle(one, two);
+    bool result = battle(this->getFirstSubject(), this->getSecondSubject());
     
     if(!result)
     {
@@ -37,11 +37,15 @@ bool Battle::battle(PlayerManager& one, PlayerManager& two)
         jugde(one, one.selectAction(two), two, two.selectAction(one));
         
         Event::ConsoleDelay();
-        std::cout << "[" << one.getName() << "] " << one.getHP() << " ";
-        std::cout << "[" << two.getName() << "] " << two.getHP() << std::endl;
         
-        Event::ConsoleDelay();
-        std::cout << " ##### NEXT TURN #### " << std::endl;
+        if( one.getHP() > 0 && two.getHP() > 0)
+        {
+            std::cout << "[" << one.getName() << "] " << one.getHP() << " ";
+            std::cout << "[" << two.getName() << "] " << two.getHP() << std::endl;
+            Event::ConsoleDelay();
+            
+            std::cout << " ##### NEXT TURN #### " << std::endl;
+        }
         
         if( one.getHP() < 1 ) return true;
         else if( two.getHP() < 1) return false;
@@ -66,8 +70,13 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                     // 상대 공격
                     std::cout << two.getName() << " 공격 " << std::endl;
                     Event::ConsoleDelay();
+                   
                     two.getDamage(one.hit(),one.getName());
-                    one.getDamage(two.hit(), two.getName());
+                    
+                    if(Event::isDead(two.getHP()))
+                    {
+                        one.getDamage(two.hit(), two.getName());
+                    }
                     break;
             
                 case Action::Defense:
@@ -86,6 +95,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                 case Action::Skill:
                     
                     // 상대 스킬
+                    std::cout << two.getName() << " 스킬 " << std::endl;
                     
                     Event::ConsoleDelay();
                     break;
@@ -97,7 +107,12 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                     Event::ConsoleDelay();
                     
                     two.getDamage(one.hit(), one.getName());
-                    two.getRest();
+                    
+                    if(Event::isDead(two.getHP()))
+                    {
+                        two.getRest();
+                    }
+                    
                     
                     break;
             }
@@ -136,6 +151,8 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                 case Action::Skill:
                     
                     // 상대 스킬
+                    std::cout << two.getName() << " 스킬 " << std::endl;
+                    
                     Event::ConsoleDelay();
                     break;
                     
@@ -167,8 +184,8 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                     Event::ConsoleDelay();
                     
                     one.getRest();
-                    
                     one.getDamage(two.hit(), two.getName());
+                    
                     Event::ConsoleDelay();
                     break;
                     
@@ -188,6 +205,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                 case Action::Skill:
                     
                     // 상대 스킬
+                    std::cout << two.getName() << " 스킬 " << std::endl;
                     
                     Event::ConsoleDelay();
                     break;
@@ -208,7 +226,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
             
         case Action::Skill :
             
-            // 스킬
+            // 나 스킬
             std::cout << one.getName() << " 스킬 " << std::endl;
             
             switch (two_status) {
@@ -234,6 +252,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                 case Action::Skill :
                     
                     // 상대 스킬
+                    std::cout << two.getName() << " 스킬 " << std::endl;
                     
                     Event::ConsoleDelay();
                     break;
@@ -255,12 +274,20 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
     }
 }
 
+PlayerManager& Battle::getFirstSubject()
+{
+    return this->player_1;
+}
+PlayerManager& Battle::getSecondSubject()
+{
+    return this->player_2;
+}
+
 void Battle::setFirst(PlayerManager& one, PlayerManager& two)
 {
-    int one_coin = rand() % 100;
-    int two_coin  = rand() % 100;
+    int coin = rand() % 100;
 
-    if(one_coin > two_coin)
+    if(coin > 50)
     {
         player_1 = one;
         player_2 = two;

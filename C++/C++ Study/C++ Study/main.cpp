@@ -12,8 +12,8 @@
 
 int main(int argc, const char * argv[]) {
     
-//    PlayerManager myPlayer("Player1", 100, 8, 1, 1);
-//    PlayerManager yourPlayer("Player2", 100, 2, 7, 1);
+    PlayerManager BasicChar("AllStr", 100, 50, 8, 1, 1);
+    PlayerManager BasicOpponent("AllDex", 100, 50, 1, 8, 1);
     
     CustomPlayer myPlayer("Player1", 100, 50, 5, 4, 1);
     CustomPlayer yourPlayer("Player2", 100, 50, 2, 7, 1);
@@ -28,8 +28,11 @@ int main(int argc, const char * argv[]) {
     
     std::cout << "########### Battle Start ###########" << std::endl;
     
-    Battle newBattle(myPlayer, yourPlayer);
-    newBattle.start(myPlayer, yourPlayer);
+//    Battle newBattle(myPlayer, yourPlayer);
+//    newBattle.start(myPlayer, yourPlayer);
+    
+    Battle newBattle(BasicChar, BasicOpponent);
+    newBattle.start();
     
     std::cout << "########### Battle end ###########" << std::endl;
 //    myPlayer.getInfo();

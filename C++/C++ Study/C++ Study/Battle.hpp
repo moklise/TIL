@@ -19,10 +19,15 @@ class Battle{
 public:
     Battle(PlayerManager& one, PlayerManager& two);
     
+    void start();
     void setFirst(PlayerManager& one, PlayerManager& two);
-    void jugde(PlayerManager& one, Action one_status, PlayerManager& two, Action two_status);
     bool battle(PlayerManager& one, PlayerManager& two);
-    void start(PlayerManager& one, PlayerManager& two);
+    void jugde(PlayerManager& one, Action one_status, PlayerManager& two, Action two_status);
+    
+    PlayerManager& getFirstSubject();
+    PlayerManager& getSecondSubject();
+    
+    
     
 };
 

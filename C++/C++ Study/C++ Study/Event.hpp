@@ -16,10 +16,11 @@
 // INT : Skill Damage
 // DEX : Rate of hit, avoidance
 enum class Ability { STR = 0, INT, DEX };
-enum class Action { Attack = 0, Defense, Skill, Rest };
+enum class Action { Attack = 0, Defense, Skill, Rest, Dead };
 
 typedef struct{
-    static void ConsoleDelay();    
+    static void ConsoleDelay();
+    static bool isDead(int _HP);
 }Event;
 
 
