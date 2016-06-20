@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class ScrollingActivity extends AppCompatActivity {
     ImageView todayFitImage2;
     ImageView todayFitImage3;
     TextView todayClass;
+    EditText tomorrowTodo;
     DBManager dbHelper;
 
     int leftDay = 0;
@@ -51,6 +53,8 @@ public class ScrollingActivity extends AppCompatActivity {
         todayFitImage2 = (ImageView) findViewById(R.id.todayFit2);
         todayFitImage3 = (ImageView) findViewById(R.id.todayFit3);
         todayClass = (TextView) findViewById(R.id.todayClass);
+        tomorrowTodo = (EditText) findViewById(R.id.tomorrowtodoText);
+
         DataConnector  = new NetworkManager();
 
         // Toolbar
@@ -83,14 +87,14 @@ public class ScrollingActivity extends AppCompatActivity {
         }
         weatherString += "\n현재 강수 확률은 "+ weatherRain.get(0) +"% 입니다.";
         
-        if(weather.get(0) > 30)
+        if(Double.valueOf(weather.get(0)) > 30)
         {
             weatherString += "\n더우니 그냥 집에 계시는게 낫겠네요";    
         }
-        else if(weather.get(0) > 20)
+        else if(Double.valueOf(weather.get(0)) > 20)
         {
             weatherString += "\n놀러다니기 좋은 날씨네요";
-        }else if(weather.get(0) > 10)
+        }else if(Double.valueOf(weather.get(0)) > 10)
         {
             weatherString += "\n놀러다니기 좋은 날씨네요";
         }else{
@@ -182,8 +186,11 @@ public class ScrollingActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "내일 할일 [ " + " ]을 추가하였습니다.", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "내일 할일 [ " + tomorrowTodo.getText() +  " ]을 추가하였습니다.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                dbHelper.b_insert("todo", String.valueOf(tomorrowTodo.getText()));
+                tomorrowTodo.setText("");
 
                 //intent로 새 액티비티 보내기
             }

@@ -76,12 +76,22 @@
         android:orientation="horizontal"
         android:layout_below="@+id/classBanner">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이름"/>
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:id="@+id/className"
             android:layout_below="@+id/textView2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시간"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -90,12 +100,19 @@
             android:id="@+id/classTime"
             android:layout_below="@+id/textView2" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="강의실"/>
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:id="@+id/classMemo"
             android:layout_centerVertical="true" />
+
+
 
         <Button
             android:layout_width="wrap_content"

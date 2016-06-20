@@ -39,6 +39,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
+                android:text="등록된 할일이 없습니다"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:padding="15dip"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15sp"
+                android:textStyle="bold"
+                android:layout_margin="5dip"
+                android:text="내일의 할일"/>
+
+            <EditText
+                android:id="@+id/tomorrowtodoText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
                 android:text="ex) 오늘은 은행에서 돈뽑기"/>
         </LinearLayout>
 

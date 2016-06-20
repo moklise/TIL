@@ -43,10 +43,15 @@ public class InitializerActivity extends AppCompatActivity {
         classAddBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Toast.makeText(getApplicationContext(),"저장되었습니다.",Toast.LENGTH_SHORT);
+
                 dbHelper.c_insert(String.valueOf(className.getText()), String.valueOf(classTime.getText()), String.valueOf(classMemo.getText()));
+                Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_SHORT);
             }
         });
+
+        className.setText("");
+        classTime.setText("");
+        classMemo.setText("");
 
     }
 }
