@@ -12,6 +12,7 @@ Battle::Battle(PlayerManager& one, PlayerManager& two)
 {
 //    setFirst(std::move(one), std::move(two));
     setFirst(one, two);
+    turns = 0;
 }
 
 void Battle::start()
@@ -28,12 +29,25 @@ void Battle::start()
     
 }
 
+int Battle::getTurns()
+{
+    return turns;
+}
+
+void Battle::nextTurns()
+{
+    turns++;
+}
+
 bool Battle::battle(PlayerManager& one, PlayerManager& two)
 {
     // 판단 - 행동 반복
     while(1)
     {
-    
+        nextTurns();
+        std::cout << std::endl;
+        std::cout << " ##### TURN " << getTurns() <<" ##### " << std::endl;
+        
         jugde(one, one.selectAction(two), two, two.selectAction(one));
         
         Event::ConsoleDelay();
@@ -43,8 +57,6 @@ bool Battle::battle(PlayerManager& one, PlayerManager& two)
             std::cout << "[" << one.getName() << "] " << one.getHP() << " ";
             std::cout << "[" << two.getName() << "] " << two.getHP() << std::endl;
             Event::ConsoleDelay();
-            
-            std::cout << " ##### NEXT TURN #### " << std::endl;
         }
         
         if( one.getHP() < 1 ) return true;

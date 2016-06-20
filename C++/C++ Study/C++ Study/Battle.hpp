@@ -15,6 +15,7 @@
 class Battle{
     PlayerManager player_1;
     PlayerManager player_2;
+    int turns;
 
 public:
     Battle(PlayerManager& one, PlayerManager& two);
@@ -23,6 +24,9 @@ public:
     void setFirst(PlayerManager& one, PlayerManager& two);
     bool battle(PlayerManager& one, PlayerManager& two);
     void jugde(PlayerManager& one, Action one_status, PlayerManager& two, Action two_status);
+    
+    int getTurns();
+    void nextTurns();
     
     PlayerManager& getFirstSubject();
     PlayerManager& getSecondSubject();
