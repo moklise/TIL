@@ -9,6 +9,7 @@
 #ifndef Battle_hpp
 #define Battle_hpp
 #include <iostream>
+#include <string>
 #include "PlayerManager.hpp"
 #include "Event.hpp"
 

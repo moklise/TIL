@@ -9,7 +9,8 @@
 #ifndef PlayerManager_hpp
 #define PlayerManager_hpp
 
-#include <stdio.h>
+#include <iostream>
+#include <string>
 #include "Event.hpp"
 
 class CustomPlayer;

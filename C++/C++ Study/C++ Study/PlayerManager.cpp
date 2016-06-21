@@ -29,12 +29,12 @@ PlayerManager::PlayerManager(std::string _name, int _HP, int _MP, int _STR, int 
     int sumState = _STR + _DEX + _INT;
     if(sumState > 10)
     {
-        std::cout << "경고!! " + _name + "의 스탯이 비정상적입니다. " << std::endl;
+        std::cout << "경고!! " << _name << "의 스탯이 비정상적입니다. " << std::endl;
         exit(1);
     }
     else if(sumState < 10)
     {
-        std::cout << "경고!! " + _name + "의 스텟을 모두 분배하지 않았습니다. " << std::endl;
+        std::cout << "경고!! " << _name << "의 스텟을 모두 분배하지 않았습니다. " << std::endl;
     }
     this->name = _name;
     this->HP   = _HP;

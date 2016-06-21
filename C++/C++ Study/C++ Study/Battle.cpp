@@ -46,8 +46,14 @@ bool Battle::battle(PlayerManager& one, PlayerManager& two)
     {
         nextTurns();
         std::cout << std::endl;
+
+#ifdef _WIN32
+		system("cls");
+		
+#endif
+
         std::cout << " ##### TURN " << getTurns() <<" ##### " << std::endl;
-        
+
         jugde(one, one.selectAction(two), two, two.selectAction(one));
         
         Event::ConsoleDelay();
@@ -73,14 +79,14 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
         case Action::Attack :
             
             // 나 공격
-            std::cout << one.getName() << " 공격 "<< std::endl;
+            std::cout << one.getName() << " Attack "<< std::endl;
             Event::ConsoleDelay();
             
             switch (two_status) {
                 case Action::Attack:
                     
                     // 상대 공격
-                    std::cout << two.getName() << " 공격 " << std::endl;
+                    std::cout << two.getName() << " Attack " << std::endl;
                     Event::ConsoleDelay();
                    
                     two.getDamage(one.hit(),one.getName());
@@ -94,7 +100,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                 case Action::Defense:
                     
                     // 상대 방어
-                    std::cout << two.getName() << " 방어 " << std::endl;
+                    std::cout << two.getName() << " Defense " << std::endl;
                     
                     if(two.getAvoidance())
                         std::cout << two.getName() << "이(가) 회피했다!" << std::endl;
@@ -107,7 +113,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                 case Action::Skill:
                     
                     // 상대 스킬
-                    std::cout << two.getName() << " 스킬 " << std::endl;
+                    std::cout << two.getName() << " Skill " << std::endl;
                     
                     Event::ConsoleDelay();
                     break;
@@ -115,7 +121,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                 case Action::Rest:
                     
                     // 상대 휴식
-                    std::cout << two.getName() << " 휴식 " << std::endl;
+                    std::cout << two.getName() << " Rest " << std::endl;
                     Event::ConsoleDelay();
                     
                     two.getDamage(one.hit(), one.getName());
@@ -133,13 +139,13 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
         case Action::Defense :
             
             // 나 방어
-            std::cout << one.getName() << " 방어 "<< std::endl;
+            std::cout << one.getName() << " Defense "<< std::endl;
             Event::ConsoleDelay();
             switch (two_status) {
                 case Action::Attack:
                     
                     // 상대 공격
-                    std::cout << two.getName() << " 공격 " << std::endl;
+                    std::cout << two.getName() << " Attack " << std::endl;
                     Event::ConsoleDelay();
                     
                     if(one.getAvoidance())
@@ -152,7 +158,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                 case Action::Defense:
                     
                     // 상대 방어
-                    std::cout << two.getName() << " 방어 " << std::endl;
+                    std::cout << two.getName() << " Defense " << std::endl;
                     Event::ConsoleDelay();
                     
                     std::cout << "아무일도 일어나지않았다. " << std::endl;
@@ -163,7 +169,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                 case Action::Skill:
                     
                     // 상대 스킬
-                    std::cout << two.getName() << " 스킬 " << std::endl;
+                    std::cout << two.getName() << " Skill " << std::endl;
                     
                     Event::ConsoleDelay();
                     break;
@@ -192,7 +198,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                 case Action::Attack:
                     
                     // 상대 공격
-                    std::cout << two.getName() << " 공격 " << std::endl;
+                    std::cout << two.getName() << " Attack " << std::endl;
                     Event::ConsoleDelay();
                     
                     one.getRest();
@@ -204,7 +210,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                 case Action::Defense:
                     
                     // 상대 방어
-                    std::cout << two.getName() << " 방어 " << std::endl;
+                    std::cout << two.getName() << " Defense " << std::endl;
                     Event::ConsoleDelay();
                     
                     one.getRest();
@@ -217,7 +223,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                 case Action::Skill:
                     
                     // 상대 스킬
-                    std::cout << two.getName() << " 스킬 " << std::endl;
+                    std::cout << two.getName() << " Skill " << std::endl;
                     
                     Event::ConsoleDelay();
                     break;
@@ -239,13 +245,13 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
         case Action::Skill :
             
             // 나 스킬
-            std::cout << one.getName() << " 스킬 " << std::endl;
+            std::cout << one.getName() << " Skill " << std::endl;
             
             switch (two_status) {
                 case Action::Attack :
                     
                     // 상대 공격
-                    std::cout << two.getName() << " 공격 " << std::endl;
+                    std::cout << two.getName() << " Attack " << std::endl;
                     Event::ConsoleDelay();
                     
                     Event::ConsoleDelay();
@@ -254,7 +260,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                 case Action::Defense :
                     
                     // 상대 방어
-                    std::cout << two.getName() << " 방어 " << std::endl;
+                    std::cout << two.getName() << " Defense " << std::endl;
                     Event::ConsoleDelay();
                     
                     Event::ConsoleDelay();
@@ -264,7 +270,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                 case Action::Skill :
                     
                     // 상대 스킬
-                    std::cout << two.getName() << " 스킬 " << std::endl;
+                    std::cout << two.getName() << " Skill " << std::endl;
                     
                     Event::ConsoleDelay();
                     break;

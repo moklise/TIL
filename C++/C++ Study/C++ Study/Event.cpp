@@ -10,7 +10,13 @@
 
 void Event::ConsoleDelay()
 {
-    usleep(1000 * 800);
+
+#ifdef _WIN32
+	Sleep(800);
+#else
+	usleep(1000 * 800);
+#endif
+
 }
 
 bool Event::isDead(int _HP)

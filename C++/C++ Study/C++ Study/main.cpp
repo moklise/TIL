@@ -11,7 +11,6 @@
 #include "PlayerManager.hpp"
 
 int main(int argc, const char * argv[]) {
-    
     PlayerManager BasicChar("AllStr", 100, 50, 8, 1, 1);
     PlayerManager BasicOpponent("AllDex", 100, 50, 1, 8, 1);
     
@@ -26,7 +25,7 @@ int main(int argc, const char * argv[]) {
     
     std::cout << std::endl;
     
-    std::cout << "########### Battle Start ###########" << std::endl;
+    std::cout << "########### Battle Start  ###########" << std::endl;
     
 //    Battle newBattle(myPlayer, yourPlayer);
 //    newBattle.start(myPlayer, yourPlayer);

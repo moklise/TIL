@@ -8,13 +8,17 @@
 
 #ifndef Event_hpp
 #define Event_hpp
-#include <iostream>
-#include <unistd.h>
 
-// Ability : 능력치에 대한 Enum
-// STR : Damage
-// INT : Skill Damage
-// DEX : Rate of hit, avoidance
+#ifdef _WIN32
+#include <Windows.h>
+#else// For Mac
+#include <unistd.h> 
+#endif
+#include <iostream>
+//
+//#include "PlayerManager.hpp"
+// Event.hpp에서 include 하면 PlayerManager.hpp 를 두번 Include 하는 문제 발생.
+//
 enum class Ability { STR = 0, INT, DEX };
 enum class Action { Attack = 0, Defense, Skill, Rest, Dead };
 
@@ -23,5 +27,9 @@ typedef struct{
     static bool isDead(int _HP);
 }Event;
 
-
 #endif /* Event_hpp */
+
+// Ability : 능력치에 대한 Enum
+// STR : Damage
+// INT : Skill Damage
+// DEX : Rate of hit, avoidance
