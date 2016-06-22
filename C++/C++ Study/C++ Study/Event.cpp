@@ -8,6 +8,34 @@
 
 #include "Event.hpp"
 
+CharacterSender::CharacterSender(std::string _name, int _HP, int _MP)
+{
+	name = _name;
+	HP = _HP;
+	MP = _MP;
+}
+
+void CharacterSender::renewal(int _HP, int _MP)
+{
+	HP = _HP;
+	MP = _MP;
+}
+
+std::string CharacterSender::getName()
+{
+	return name;
+}
+
+int CharacterSender::getHP()
+{
+	return HP;
+}
+
+int CharacterSender::getMP()
+{
+	return MP;
+}
+
 void Event::ConsoleDelay()
 {
 
@@ -19,8 +47,14 @@ void Event::ConsoleDelay()
 
 }
 
-bool Event::isDead(int _HP)
+void Event::MakeScreen(CharacterSender& subjectOne, CharacterSender& subjectTwo)
 {
-    if(_HP > 0) return true;
-    else        return false;
+	std::cout << "\t\t\t\t 1 " << std::endl;
+	std::cout << "\t\t\t\t 1 " << std::endl;
+	std::cout << "\t\t\t\t  " << subjectOne.getHP() << "\t" << subjectTwo.getHP() << std::endl;
+	std::cout << "\t\t\t\t 1 " << std::endl;
+	std::cout << "\t\t\t\t 1 " << std::endl;
+	std::cout << "\t\t\t\t 1 " << std::endl;
+	std::cout << "\t\t\t\t 1 " << std::endl;
+	std::cout << "\t\t\t\t 1 " << std::endl;
 }

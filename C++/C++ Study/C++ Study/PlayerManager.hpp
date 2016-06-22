@@ -39,6 +39,8 @@ public:
     int getINT() const;
     
     int hit() const;
+	bool isDead() const;
+
     void getDamage(int _damage, std::string opponent_name);
     void getRest();
     bool getAvoidance() const;

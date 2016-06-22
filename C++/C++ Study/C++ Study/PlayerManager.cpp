@@ -93,6 +93,12 @@ int PlayerManager::hit() const
     return ((double)(STR*0.7)*(double)(DEX*0.3))*2 + additional;
 }
 
+bool PlayerManager::isDead() const
+{
+	if (this->getHP() > 0) return false;
+	else return true;
+}
+
 void PlayerManager::getDamage(const int _damage, const std::string opponent_name)
 {
     std::cout << opponent_name << " 가 " << _damage << " 데미지를 가했다! " << std::endl;

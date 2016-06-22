@@ -41,7 +41,10 @@ void Battle::nextTurns()
 
 bool Battle::battle(PlayerManager& one, PlayerManager& two)
 {
-    // 판단 - 행동 반복
+	CharacterSender subjectOne(one.getName(), one.getHP(), one.getMP());
+	CharacterSender subjectTwo(two.getName(), one.getHP(), one.getMP());
+
+	// 판단 - 행동 반복
     while(1)
     {
         nextTurns();
@@ -49,6 +52,9 @@ bool Battle::battle(PlayerManager& one, PlayerManager& two)
 
 #ifdef _WIN32
 		system("cls");
+		subjectOne.renewal(one.getHP(), one.getMP());
+		subjectTwo.renewal(two.getHP(), two.getMP());
+		Event::MakeScreen(subjectOne, subjectTwo);
 		
 #endif
 
@@ -91,7 +97,7 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                    
                     two.getDamage(one.hit(),one.getName());
                     
-                    if(Event::isDead(two.getHP()))
+                    if(two.isDead())
                     {
                         one.getDamage(two.hit(), two.getName());
                     }
@@ -126,9 +132,9 @@ void Battle::jugde(PlayerManager& one, Action one_status, PlayerManager& two, Ac
                     
                     two.getDamage(one.hit(), one.getName());
                     
-                    if(Event::isDead(two.getHP()))
+					if (two.isDead())
                     {
-                        two.getRest();
+                       two.getRest();
                     }
                     
                     
