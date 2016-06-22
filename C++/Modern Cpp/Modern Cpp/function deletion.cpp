@@ -30,7 +30,7 @@ int main(void){
     std::cout << isLucky2(2) << std::endl;
     
     // DELETION 적용된 함수의 호출
-    A.isLucky('A');     // Error!!
-    A.isLucky("AAA");   // Error!!
-    A.isLucky(1.1);     // Error!!
+    //A.isLucky('A');     // Error!!
+    //A.isLucky("AAA");   // Error!!
+    //A.isLucky(1.1);     // Error!!
 }

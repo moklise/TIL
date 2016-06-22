@@ -7,6 +7,8 @@
 //
 
 #include <iostream>
+#include <string>
+#include <cassert>
 
 [[noreturn]] void func1(){
     std::cout << "NORETURN" << std::endl;
@@ -23,7 +25,7 @@ int main(void) {
     switch (selector) {
         case 0:
         case 1:
-            std::cout << "뀨뀨꺄꺄" << std::endl;
+            std::cout << "????" << std::endl;
             [[fallthrought]];
             
         case 2:

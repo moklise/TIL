@@ -8,8 +8,9 @@
 
 #include <iostream>
 #include <vector>
-#include <cstring>
+#include <string>
 #include <map>
+#include <algorithm>
 
 template<class T>
 void print_list(T value)
