@@ -36,6 +36,7 @@ PlayerManager::PlayerManager(std::string _name, int _HP, int _MP, int _STR, int 
     {
         std::cout << "경고!! " << _name << "의 스텟을 모두 분배하지 않았습니다. " << std::endl;
     }
+
     this->name = _name;
     this->HP   = _HP;
     this->MP   = _MP;
@@ -99,10 +100,11 @@ bool PlayerManager::isDead() const
 	else return true;
 }
 
-void PlayerManager::getDamage(const int _damage, const std::string opponent_name)
+void PlayerManager::getDamage(const int _demage, const std::string opponent_name)
 {
-    std::cout << opponent_name << " 가 " << _damage << " 데미지를 가했다! " << std::endl;
-    HP -= _damage;
+	Screen::message += opponent_name + "가 " + _demage + " 데미지를 가했다!\n";
+    //std::cout << opponent_name << " 가 " << _demage << " 데미지를 가했다! " << std::endl;
+    HP -= _demage;
     Event::ConsoleDelay();
 }
 

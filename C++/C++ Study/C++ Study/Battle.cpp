@@ -41,22 +41,13 @@ void Battle::nextTurns()
 
 bool Battle::battle(PlayerManager& one, PlayerManager& two)
 {
-	CharacterSender subjectOne(one.getName(), one.getHP(), one.getMP());
-	CharacterSender subjectTwo(two.getName(), one.getHP(), one.getMP());
-
 	// 판단 - 행동 반복
     while(1)
     {
         nextTurns();
         std::cout << std::endl;
 
-#ifdef _WIN32
-		system("cls");
-		subjectOne.renewal(one.getHP(), one.getMP());
-		subjectTwo.renewal(two.getHP(), two.getMP());
-		Event::MakeScreen(subjectOne, subjectTwo);
-		
-#endif
+		Screen::MakeScreen(one.getName(), one.getHP(), one.getMP(), two.getName(), two.getHP(), two.getMP());
 
         std::cout << " ##### TURN " << getTurns() <<" ##### " << std::endl;
 

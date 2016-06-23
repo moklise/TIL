@@ -8,34 +8,6 @@
 
 #include "Event.hpp"
 
-CharacterSender::CharacterSender(std::string _name, int _HP, int _MP)
-{
-	name = _name;
-	HP = _HP;
-	MP = _MP;
-}
-
-void CharacterSender::renewal(int _HP, int _MP)
-{
-	HP = _HP;
-	MP = _MP;
-}
-
-std::string CharacterSender::getName()
-{
-	return name;
-}
-
-int CharacterSender::getHP()
-{
-	return HP;
-}
-
-int CharacterSender::getMP()
-{
-	return MP;
-}
-
 void Event::ConsoleDelay()
 {
 
@@ -47,14 +19,25 @@ void Event::ConsoleDelay()
 
 }
 
-void Event::MakeScreen(CharacterSender& subjectOne, CharacterSender& subjectTwo)
+void Screen::MakeScreen(std::string subjectOneName, int subjectOneHP, int subjectOneMP, std::string subjectTwoName, int subjectTwoHP, int subjectTwoMP)
 {
-	std::cout << "\t\t\t\t 1 " << std::endl;
-	std::cout << "\t\t\t\t 1 " << std::endl;
-	std::cout << "\t\t\t\t  " << subjectOne.getHP() << "\t" << subjectTwo.getHP() << std::endl;
-	std::cout << "\t\t\t\t 1 " << std::endl;
-	std::cout << "\t\t\t\t 1 " << std::endl;
-	std::cout << "\t\t\t\t 1 " << std::endl;
-	std::cout << "\t\t\t\t 1 " << std::endl;
-	std::cout << "\t\t\t\t 1 " << std::endl;
+
+	// Graphic
+#ifdef _WIN32
+	system("cls");
+	std::cout << "\t\t\t  " << std::endl;
+	std::cout << "\t\t\t  " << std::endl;
+	std::cout << "\t\t\t " << subjectOneName << "\t\t" << subjectTwoName << std::endl;
+	std::cout << "\t\t\t  " << std::endl;
+	std::cout << "\t\t\t " << subjectOneHP << "\t\t" << subjectTwoHP << std::endl;
+	std::cout << "\t\t\t " << subjectOneMP << "\t" << subjectTwoMP << std::endl;
+	std::cout << "\t\t\t  " << std::endl;
+	std::cout << "\t\t\t  " << std::endl;
+	std::cout << "\t\t\t  " << std::endl;
+	std::cout << "\t\t\t  " << std::endl;
+#endif
+
+	// Text Status
+
+
 }
