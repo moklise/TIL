@@ -16,7 +16,8 @@ template<class T>
 struct S{
     std::vector<T> v;
     
-    S(std::initializer_list<T> l):v(l){ };
+    S(std::initializer_list<T> l)
+    :v(l){ };
     void append(std::initializer_list<T> l){
         v.insert(v.end(), l.begin(), l.end());
     }

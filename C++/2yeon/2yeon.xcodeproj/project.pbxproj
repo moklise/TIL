@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EE21C8EE1CEA25CA005DA439 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE21C8ED1CEA25CA005DA439 /* main.cpp */; };
+		EED3EA591D1E586B00885C64 /* array.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EED3EA581D1E586B00885C64 /* array.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +25,10 @@
 /* Begin PBXFileReference section */
 		EE21C8EA1CEA25CA005DA439 /* 2yeon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 2yeon; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE21C8ED1CEA25CA005DA439 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		EE4DBE291D0E457200ACF70B /* dhmalloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dhmalloc.c; sourceTree = "<group>"; };
+		EED3EA561D1E452300885C64 /* jy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jy.cpp; sourceTree = "<group>"; };
+		EED3EA581D1E586B00885C64 /* array.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = array.cpp; sourceTree = "<group>"; };
+		EEEBAEC41D115202000B5E18 /* sh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sh.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +45,7 @@
 		EE21C8E11CEA25CA005DA439 = {
 			isa = PBXGroup;
 			children = (
+				EED3EA581D1E586B00885C64 /* array.cpp */,
 				EE21C8EC1CEA25CA005DA439 /* 2yeon */,
 				EE21C8EB1CEA25CA005DA439 /* Products */,
 			);
@@ -58,6 +63,9 @@
 			isa = PBXGroup;
 			children = (
 				EE21C8ED1CEA25CA005DA439 /* main.cpp */,
+				EE4DBE291D0E457200ACF70B /* dhmalloc.c */,
+				EEEBAEC41D115202000B5E18 /* sh.cpp */,
+				EED3EA561D1E452300885C64 /* jy.cpp */,
 			);
 			path = 2yeon;
 			sourceTree = "<group>";
@@ -118,7 +126,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE21C8EE1CEA25CA005DA439 /* main.cpp in Sources */,
+				EED3EA591D1E586B00885C64 /* array.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +247,7 @@
 				EE21C8F31CEA25CA005DA439 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
