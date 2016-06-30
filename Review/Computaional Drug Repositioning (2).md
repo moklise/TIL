@@ -9,13 +9,15 @@
 	> 인간 유전자 연구는 특정 유전자와 특정 질병간의 연결이 있음을 알리는 강력한 단서를 제공한다.
 
 2. Recent technological advances such as next-generation sequencing have accelerated the discovery of gene-disease associations by drastically reducing the cost of whole-exome sequencing.
+	> next-generation sequencing 같은 최근 기술 발전은 과감하게 모든 exon sequencing의 비용을 줄임으로써 유전자-질병 관계의 발견을 가속화하고있다.
 
 	> 예시로 아데노신 신진대사에서 성인 동맥 석화화의 형성과 관련된 효소의 정보를 담고있는 유전자인 NTE5의 식별이 존재한다.
 	> 이 효소가 발견되었을때
 	> 이 경우, 항혈전제 ( 혈소판의 혈액응고 작용 억제제 )가 처방되는데
 	> 아데노신의 재흡수가 억제되어, 잠재적으로 도움이 되기 때문이다.
 	 많은 단성 장애인들은, 원인유전자에서의 돌연변이는 단백질 결과물의 발생에 지장을 준다.
-	 그러므로 만약 그 타겟이 질병 유전자면 Activator가 필요해질 가능성이 높다.
+	 그러므로 만약 그 타겟이 질병 유전자면 Activator가 필요해질 가능성이 높으므로
+	 Activator가 활성화되면 그 Target 이 a disease gene 임을 알 수 있다.
      
      ```동맥 석화화 형성과 관련된 효소가 발견됨 -> 동맥 석화화 형성과 관련된 효소의 생성을 막기위해 아데노신의 흡수를 막음 -> 아데노신의 생성을 위해 Activator가 필요하게 됨. -> ????```
 	
@@ -24,9 +26,9 @@
 	> GWAS는 소유전자 질병과 유전학적 변종 사이에서의 연관이 있다는것을 보여주었고. 그 결과 많은 복합적인 질병들과 연결되어이 있다는 것이 밝혀졌다.
 	Francis Collins 이 US NCATS 창설 당시 발표 내용에서, 이미 시장에 나온 Drug와 연관이 있는 type 2 diabetes를 위해 44 GAWS loci 중 6개를 관찰했다고 한다. 이 관찰은 GWAS-identified genes이 작은 분자들과 생물학에 의해 쉽게 다룰 수 있는 가능성이 있다는 것을 말해주었다. 이 studies 들은 인간 유전체학과 약리학의 집합이 더 나은 drug target의 몇몇을 주목할수도 있다 라는 것을 말해준다.
     
-    모든 155개의 유전자들은 이미 개발중이거나 시장에나온 상품들에 의해 being targeted 되고 식별되어있다.
+    > 모든 155개의 유전자들은 이미 개발중이거나 시장에나온 상품들에 의해 being targeted 되고 식별되어있다.
     
-    그중에서 92개의 타겟 유전자들에 약 징후는 GWAS에 의해 식별된 질병특성과는 다르다.
+    > 그중에서 92개의 타겟 유전자들에 약 징후는 GWAS에 의해 식별된 질병특성과는 다르다.
     이 상황은 92개의 gene produts을 타겟으로 하고있는 drugs 이 GWAS에 의해 새로운 질병 특성으로 평가 되어질수 있다는 것을 의미한다.
     
 4. It is evident that the gene-disease association identified by GWAS inform possible drug repositioning opportunities.
@@ -34,8 +36,8 @@
 
 	> 그러나 GWAS 데이터를 사용하는데 있어서 어려움이 존재한다.
 	GWAS 정보를 단독으로 사용했을때, 요구되는 치료영향의 방향의 부재는 개시자나 억제자가 필요한지 아닌지 알아내는것을 어렵게 하고있다.
-    게다가 단성의 장애는 대부분 기능문제에 의해 발생되어,
-    그러므로 Repositioning methods들은 식별된 유전자의 negative regulator를 대상으로 하거나 dipyrida mole 같은 경우처럼 기능의 손실의 기계론적인 영향을 상쇄 시키거나 하는 약에 집중해야 한다.
+    게다가 단성의 장애는 대부분 기능문제에 의해 발생되기 때문에,
+    Repositioning methods들은 식별된 유전자의 negative regulator를 대상으로 하거나 dipyrida mole 같은 경우처럼 기능의 손실의 기계론적인 영향을 상쇄 시키거나 하는 약에 집중해야 한다.
 
 
 ### Other methods
