@@ -18,3 +18,18 @@
 <hr/>
 ####Time Line
 160625 (토) : 스터디에 대해 논의
+
+160728 (수) :
+1. vector, iterator
+2. git 사용법
+
+160705 (수) :
+1. STL이란 무엇인가
+2. vector를 포함한 실용적인 STL container
+3. queue를 이용한 dijkstra algorithm 구현하기
+
+// 
+Dijkstra 를 이용한 Maze 탈출 알고리즘작성
+A*
+Bot 제작
+Text Battle
