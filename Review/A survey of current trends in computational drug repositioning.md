@@ -17,15 +17,16 @@
 	> 이 분은 가깝게 연결된 drug-disease 모듈을 찾아내기 위하여 drug-disease 이질적 네트워크에 network clustering을 접목했다.
 	> 여기서 drug-disease 모듈이란 drug repositioning을 위해 가능한 drug-disease pairs 를 추출하는데 사용될 수 있는 모듈을 말한다.
 	> 이 네트워크에선 하나의 약이든 질병이든 유전자,타겟, 많은 특징들을 공유하는 두 Node는 연결되어있으며, 그 연결은 jaccard score로 weight를 얻는다.
+	> jaccard score : 두 Set 사이에서 얼마나 겹치는 정도를 수치화 한 계수
 
 4. Jin et al
-	> 이분은 off-target effects(OTEs)의 효력을 이용하여, 암 치료 약을 리포지셔닝 하는 중요한 메소드를 개발하고 있음.
+	> 이분은 off-target effects(OTEs)를 이용하여, 암 치료 약을 리포지셔닝 하는 중요한 메소드를 개발하고 있음.
 	> OTEs란 중요한 암 cell signaling pathways에 영향을 줄 수도 있는 방식임.
-	> signaling proteins에서 drugs의 OTEs 은 
+	> signaling proteins에서 drugs의 OTEs 은 Bayesian Factor Regression Model 과 cancer-signaling briges라고 불리는 네트워크 component에 의해 구성된 하이브리드 모델에 의해 식별됨
 	> 
 	> The OTEs of drugs on signaling proteins were recognized by a hybrid model composed by a network component and a regression model.
 	> 
-	> Bayesian Factor Regression Model 과 cancer-signaling briges라고 불리는 네트워크 component에 의해 구성된 하이브리드 모델에 의해 식별됨
+	> 
 
 
 #### Text mining and semantic inference
@@ -98,10 +99,25 @@
 	> 적절한 검증 모델을 이해하고 선택하는 것은 the prediction의 성공에 있어서 중요하다.
 	> 검증 모델의 문맥은 the prediction을 만드는데 사용된 것들로부터 달라질 수도 있고,
 	> 몇몇 검증 모델 자체로도 신뢰할 수 없기 때문이다
-	> 예로 
+	> 예로 mouse models 에서의 유전적 반응이 인간 염증성 질병을 흉내낼 수 있다는 것은 논의의 여지가 있다.
+	> 간암 세포계의 절반은 TCGA로 부터 HCC와 크게 연관이 있지않다. ( 위 예는 서로 연관이 없는 듯)
+
+	> 게다가 적합한 모델의 선택에 있어서 검증을 위한 선택은 또한 중요하다.
+	> 몇몇 drugs들은 의사나 생물학자에 의해 고 위험, 고비용, 저유용의 이유로 선호 되고 있지않은데,
+	> 이 drugs들이 연구된다면 전통 연구 방법에서의 성공률을 높여줄 수 있을 것이다.
+	> 
 
 #### Current and future target areas: cancers, infectous and orphan diseases and personalized medicine
 1. Intro
+	> 질병에 있어서 drug repositioning 의 매우 잠재적인 application들 중 하나는 바로 anticancer drug discovery 이다.
+	> Repositioning의 이점과 annticancer의 높은 수요 덕분에 motivated 되고 있으며,
+	> 이미 존재하는 약으로부터 중요한 anticancer 치료법을 찾아내는 Repositioning의 인기는 계속해서 증가하고 있다.
+	> Drug repositioning은 또한 drug 저항을 극복할 수 있는 anti-infectious drug의 발견을 위한 방법이 되었다.
+	> 약 저항의 발생은 인간에게 해롭고 drug efficacy를 줄이기 때문이다.
+	> 희귀 질병의 대안적 치료법은 또한 이미 시장에 나온 약으로 부터 발견되어질 수 있다.
+	> 이 전략은 이 분야에서의 연구를 지원하는 다양한 도움을 줄 것이다.
+	> 마지막으로, Drug repositioning은 개인맞춤치료의 새로운 접근성을 제공할 것이다.
+	> Table 2는 여러 질병이 적용된 drug repositioning의 예제들이다.
 2. Li et al
 
 #### Discussion
