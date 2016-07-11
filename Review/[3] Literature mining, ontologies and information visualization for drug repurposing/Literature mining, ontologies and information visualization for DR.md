@@ -17,10 +17,25 @@ The discovery of novel links between seemingly unrelated concpets.
 IE
 NER 
 
+##### For Instance
 
+###### Smalheiser and Swanson
+###### Gordon and Lindsay
+###### Weeber
+###### LitLinker and Telemakus
+###### Van der Eijk et al
+###### Wren et al
+###### Narayanasamy et al
+###### Ahlers et al
+###### Petric et al
+###### Hristovski et al
+###### Baker et al
+###### Ha et al
+###### Zhu et al
 
+###### Conclusion
 
-Information Extration
+####Information Extration
 
 The NER step is a prerequisite for any IE project.
 
@@ -56,8 +71,12 @@ NLP
 결론.
 Co-occurence보다 NLP가 new discovery에 대한 더나은 guidance를 제공함.
 
+##### For Instance
 
-####Ontology Moddeling
+######
+
+
+####Ontology Modeling
 Biology같은 경우는 다른 과학분야와 달리
 수치적으로 완전히 계산되어있는 분야가 아니기때문에
 수학공식과 다르게 기록될때 주관적인 방법으로 서술되어있는 경우가 있음.
@@ -68,6 +87,10 @@ Despite some shortcomings of popular semantic web languages to comprehensively d
 Semanticf web technologies는 concept의 description을 위한 수단으로써 널리 사용되어왔다.
 
 그중에는 RDF 기반의 OWL ( Ontology Web Language ) 가 존재한다.
+
+##### For Instance
+
+###### Ashburn et al
 
 
 #### Visualization thecnique
@@ -84,7 +107,31 @@ Graphics 언어도 존재하고, 툴도 존재하기때문에, 최소한의 노�
 많은 양의 데이터를 시각화 하려고 할때 2D의 시각화시 더 복잡해 질 수 있다.
 그때는 3D 시각화가 적절한 방법이다.
 
+
 ####Traversal to the area of DR
+####Drug Repurposing Applications
+
+###### Frijters et al.
+###### Li et al.
+###### Qu et al.
+###### Cockell et al.
+###### Choi et al.
+###### Cure and Giroud et al.
+
+-------- Visualization Techniques Example --------
+###### Cerami et al
+###### Keiser et al
+###### Campillos et al
+###### Hu and Agarwal
+###### Pujol et al
+###### Paolini et al
+###### Iorio et al.
+###### Narayanasamy et al
+###### Li et al
+###### Korbel et al
+###### Campbel et al
+###### Clinical Outcome Search Space
+
 
 #### Concoluding Remark
 DR는
