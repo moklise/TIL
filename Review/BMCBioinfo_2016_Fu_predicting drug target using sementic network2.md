@@ -15,6 +15,9 @@ In combination with RW normalization 에서는
 RF에서 2%까지의 향상을 보였고
 SVM에서는 3.5%의 향상을 보였다.
 
+#####Fiqure 2
+
+
 이 성능향상의 차이점은 Fig.2 에서 ROC and PR curves를 통해 확연히 드러난다.
 
 > FEATURE간의 차이보다 RF 와 SVM의 차이를 강조하고 있네
@@ -36,6 +39,9 @@ Fig 2 에서 보인것처럼
 the ROC curves는 가깝게 모여있고,
 the PR curves에서는 크게 분리되어있다.
 
+#####TABLE 4
+
+
 Table 4
 AUCPRs 사이에서의 차이들은 AUCROCs사이의 차이보다 크다.
 
@@ -47,6 +53,9 @@ semantic network에서 link prediction를 예견하기 위해 중요하다는 �
 모든 the machine learning models이
 over-fitting없이 tarining and test sets에서 잘 작동 되는 것은 눈 여겨볼만 하다.
 
+> over-fitting이 없다? -> 모든 데이터들이 비슷비슷하다?
+> 
+
 게다가, feature set 2 and feature set 3의 AUCROCs는 SLAP에서 나온 수치인 0.92보다 더 크게 나왔다.
 
 그러므로, meta-path-based topological features 은
@@ -55,6 +64,7 @@ complex semantic networks에서 link prediction할 가치가 있다는 것을 �
 
 <hr/>
 
+##### Table 5	
 // This approach와 SLAP를 비교하기 위해, AUCROC과 BEDROC를 이용한다.
 
 
@@ -78,7 +88,8 @@ This approach는 default coeffiecient parameter를 사용하면서,
 이 차이는 Fig.3 에 나와있다.
 
 > BEDROC : 
-> 
+> The Boltzmann-Enhanced Discrimination of ROC
+(BEDROC) Metric.
 
 <hr/>
 
