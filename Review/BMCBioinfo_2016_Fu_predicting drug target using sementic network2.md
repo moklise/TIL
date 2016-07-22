@@ -121,7 +121,10 @@ contain similarity neighboring links를 포함하고 있다는 것도 눈 여겨
 
 <hr/>
 
-predictions를 만들기 전 pre-calculates feature importance 하는 SLAP와 대조적으로, 제안된 Framework는은 feature importance를 평가할 수 있고, 동시에 predictive models을 만들 수 있다.
+##### Training set의 선택은 성능좋은 predictive machine learning models을 만드는데 영향을 미친다.
+
+predictions를 만들기 전 pre-calculates feature importance 하는 SLAP와 대조적으로, 
+제안된 Framework는은 feature importance를 평가할 수 있고, 동시에 predictive models을 만들 수 있다.
 
 given topological feature may vary to some extent when
 different sets of training data are considered, or when
@@ -136,7 +139,7 @@ feature importance가 매우 다양할수도 있다는 것을 보이기 위해 �
 
 우리는 feature 2 에서 임의적으로 선택된 traning sets을 사용하여, 1000개의 RF models를 만들었다.
 
-각 Traning set은 DrugBank로 부터 100 positively labeled links 와 PubChem BioAssay set 100 Negatively labeled links with experimental bioactivity value greater than 10 μM. 
+각 Traning set은 DrugBank로 부터 100 positively labeled links 와 PubChem BioAssay set 100 Negatively labeled links with experimental bioactivity value greater than 10 μM.
 
 이 다른 models에서의 feature importnace의 변화는 Fig 5에서 보여질 수 있다.
 그것은 feature importance가 다른 모델에서 다양하게 존재한다는 것을 명확하게 보여주고있다.
@@ -165,8 +168,10 @@ The predictive performances of those 1,000 RF models,
 
 chemical and biological space 분야에서의 지식을 통합한 The semantic network
 는 large-scale data mining에 영향을 줄 수 있다.
+
 semantic links의 다른 종류들 중에서, 
-drug-target connectivity maps이 drug discovery and development, 특히 drug repositioning and polypharmacology research에서 이득을 취한 이래로, drug-target connectivity maps는 더 넓게 사용되어왔다.
+drug-target connectivity maps이 drug discovery and development, 특히 drug repositioning and polypharmacology research에서
+이득을 취한 이래로, drug-target connectivity maps는 더 넓게 사용되어왔다.
 
 In the present work,
 우리는 link prediction을 위한 complex semantic network에서 meta-path-based topological features를 사용하는 최신 machinlearning models의 구축하는 framework를 제안한다.
@@ -185,3 +190,20 @@ In the future,
 2.얼마나 traning set selection이 predictive performance를 향상시킬 수 있는가.
 에 대해서 연구할 것이다.
 
+
+
+### Out Of Bag Error
+
+Out-of-bag (OOB) error, also called out-of-bag estimate, is a method of measuring the prediction error of random forests, boosted decision trees, 
+and other machine learning models utilizing bootstrap aggregating to sub-sample data sampled used for training. OOB is the mean prediction error on each training sample xᵢ, using only the trees that did not have xᵢ in their bootstrap sample.
+
+의사결정 트리를 이용한 RF의 the prediction error를 측정하는 방법이다.
+data sample을 모으는 bootstrap을 사용하는 다른 machine learning models 이 traning을 위해 사용된다.
+
+OOB는 bootstrap sample에서 x를 사용하지 않은 tree들이 x를 사용하면서
+각 traning sample x에 대한 the mean prediction error  이다.
+
+> x 가 없는데 사용해서 에러가 뜨는거
+> RF에서는 뜨지않고 다른 machine learning models 에서만 뜸
+
+classification accuracies 와 Gini indexes ( node impurities )
