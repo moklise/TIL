@@ -172,7 +172,7 @@ such as PharmGKB, VARIMED,and ClinVar
 discovering relations를 위한 유망한 방향을 보여준다.
 이는 이 this article에서 언급되는 많은 methods들에게 동기부여한다.
 
-Application of biomedical relation extraction
+#####Application of biomedical relation extraction
 
 Extracting biomedical relations 는 기초 과학의 발전부터 임상치료의 향상까지 많은 적용 방법이 있다. (Figure 2처럼)
 이 적용 방법들은 
