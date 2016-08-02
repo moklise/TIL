@@ -1017,3 +1017,193 @@ Some 은 포괄적으로 the biomedical domain과 연관이 있다.
 Some 은 target-specific biomedical subdomain
 (e.g. knowledge bases such as PDB [101], Uniprot [121], SIDER [164], DrugBank [165], HIVDB [166], RegaDB [167], Entrez Gene [153], GENA [18]
 and IntAct [169])
+
+
+##### Lraod ahead
+비록 graph-based algorithms을 the extraction of biomedical relations에 적용시킴에 있어서  주목할만한 과정들이 발견되었지만,
+실용적인 relation extraction methods 를 개발하는데 있어서 장벽은 generalizable and sufficiently accurate 이다.
+
+> 일반화와 그리 높지않은 정확성
+ 
+밑에 우리는 몇몇 장벽과 이를 극복할 수 있는 잠재적인 방향에 대해서 설명해놓았다.
+
+#####Not all parsers and dependency encodings are synergistic
+#####모든 parsers와 dependency encodings는 synergistic 한것은 아니다.
+반복적으로 the choice of the parser and dependency encdoings 는 relation extraction system's performance에서 중요한 역할을 할지도 모른다는 것은 주목 할만한다.
+
+Buyko et al.
+the impact of graph encoidng based on different parser 
+(Charniak-Johnson, McClosky-Charniak-Johnson, Bikel, Gdep, MST, MALT)
+and dependency representations  에 대한 compative analysis를 수행했다.
+(Stanford Dependency and CoNLL dependency).
+
+그리고 
+the CoNLL dependency representation 이 
+the Stanford Dependency representations보다 4개의 parser를 통합해서 사용하는 것에있어서
+더 나은 성능을 보여준다는것을 발견했다.
+
+그리ㅗㄱ
+McCLosky-Charniak-Johnson parser 은 빈번하게 가장 성능 좋은 parser이기도 했다.
+
+Miwa et al. 같은경우
+BioNLP-ST-2009 를 위해 five syntactic parser 를 비교했다.
+
+그들은
+비록 각각 parsers를 사용하는 것으로부터의 성능은 크게 차이나지않지만,
+parsers 여러개를 쓰거나, 다른 dependency representations를 쓰는것은 the event extraction results를 크게 향상시킬수 있다고 결론지었다.
+
+> 혼합해서 쓰는게 좋다고하네여
+
+Stanford Dependency 는 the most wideely used dependency encoding 이기 떄문에,
+그들은 또한 이에대해 다양한 다른 Stanford Dependecy variants들을 사용하였고,
+만약 dependency edges의 types가 유지된다면  basic dependency 가 최고성능을 보인다는 것을 발견했다.
+
+반면에,
+만약 types of dependecy edges를 무시한다ㅕㄴ,
+그들은 the collapsed dependency variant 가 최고의 성능을 보여준다는것을 발견했다.
+
+Luo et al 에 의해 밝혀였다.
+
+In [49] 에서,
+the task 는 relations를 lymphma subtypes를 분류하기위한 features로써 추출하는 것이였다.
+in the BioNLP_ST event extraction tasks에서 superviesed relation classification에서 처럼
+그들 자체를 분류하는것 대신.
+
+따라서, recall은 the feature learning step에서 관심이 있는 것이 되었다.
+the feature learning step이란 types of dependencies를 무시하는 것이 the coverate of subgraph patterns 향상에 도움을 주는것,
+
+이를 통해서 배운 The lessons은 각 challenges로부터의 top participants로부터 각각 reports들이 확립된 것처럼 보인다.
+
+그리고 The lessons들은 parser-dependency choice의 인기와 함께 consistent 이다. 
+non-challenge applications in sections Pharmacogenomics and Sepearately motivated clinical relation extraction.
+
+특히,
+우리는 good combination은 the McClosky-Charniak-Johnson parser 나 Stanford parser augmented with medical lexicon 으로부터 선택하는 것이라고 기대한다
+
+그리고 either CoNLL dependency or collapsed Stanford dependency 으로부터 선택하느 ㄴ것.
+
+
+Intergrating coreference resolution
+Coreference는 빈번하게 biomedical literature 나 clinical narrative text에서 발생한다.
+the same concepts을 위해 prounouns, anaphora and varied entities의 사용으로부터 발생하면서,
+
+Care must be exerciesd to transfer the correct relation along the coreference chain.
+
+
+그러나, relation and event extraction을 위한  Many of the reviewed approaches는 a built-in coreference resolution component를 가지고 있지않다.
+
+Miwa et al
+구체적으로
+the impact of using a coreference resoulution 에 대해 연구했고,
+improved event extraction performance 를 보여주었다.
+
+특히,
+그들은 a rule-based coreference resolution system을 개발했는데.
+이는 detecting rules for mextion antecedent and coreferential link로 구성되어있다.
+
+그들은 
+the coreference information을 syntactic parse results를 조절하는데 사용했다
+antecedent and mention share dependencies
+
+
+Features는 또한 확장되었다 between mentions and antecedents.
+
+the importance of coreference features를 recognizing 하면서,
+그후에 몇몇 systems는 across sentences 하여 coreference resoulition 을 보충했다
+
+그들은 relations의 특정 types을 추출하는 것을 촉진하기 위해,
+heuristic/rule-based coreference resoulition이 domain-adapted statistical machine learning systems를 능가하는 경향이 있다는 것을 보여주었다.
+
+Part of their lessons 는 in relation extraction corpora에서 the lack of gold-standard coreference anotation을 걱정했다
+
+따라서,
+우리는 기대한다.
+paired relation and coreference annotations 는
+coreference resolution and ultimately relation extraction 을 향상시킬수 있다는 것을.
+
+게다가,
+coreference resolution을 the learning objective of relation extraction에 통합하느 ㄴ것은
+더 포괄적인 최적화와 더나은 end-to-end performance로 이끌지도 모른다.
+
+
+
+######General relation and event extraction and domain adaption
+
+최신 relation and event exttraction systems from shared tasks 는
+대부분 around domain-specific definitions of relations and events, many of which are in fact binary (PPI, DDI) and i2b2/VA challenge
+이다.
+
+> 그니까 요즘 relation and event extraction system은 모두 일반적으로 사용할수 있는 툴이 아닌 특정 분야를 대상하로 한 툴.
+
+그러나,
+the technical advances and the demands from many rea-world tasks 사이에는
+pharmacogenomics semantic networks를 만들고,
+clinical trial eligibility criteria 를 추출하고,
+test results for automating diagnosis categorization을 보여주는데 있어서,
+gap이 존재한다.
+
+> 무슨 차이가 존재하지
+
+In those tasks,
+general relation and event discovery는 필수적이다.
+where nodes의 숫자가 때때로 바뀔수있고,심지어는 the relation/event structure가 전체적으로 prespecified 되어있지 않을지도 모른다.
+
+> relation event structure가 우리가 모르는 특정한 것에 대한 relation/event일 수 있다라는 거지
+
+the automation of annotaion scheme learning or unsupervised relation extraction을 탐색하는
+Systems는 일반화 하려는 시도를 했었다.
+그러나 여전히 accuracy를 증가시키는데있어서 큰 여지가 존재한다.
+
+Another challenge는 domain-specific relation/event definition에 의해서 가져온 것인데,
+Another challenge는 the training data를 염려한다.
+
+> ? 무슨 뜻이지
+
+THe problem of limited training data 는
+종종 NLP systmes의 개발을 괴롭힌다.
+the relation extraction systems는 예와가 없다.
+
+더나은 존재하는 annotated corpora의 사용을 만들기위해,
+domain adaptation from external training corpora(source) to the target corpora를 수행하는 것은 필수적이다.
+
+> 외부의 training corpora를 the target corpora로 적용시키는 것이  뭐하는걸까
+
+단지,
+top systems 을 the new format에 adapting 하는것과
+training on the new corpora 하는 것은
+새로운 분야에서의 top performers로 이끄는 것은 아니다.
+
+> ?/
+
+예를들면, the adapted TEES system in SemEval 2015 Task 14
+
+Miwa et al은
+adding
+source instances followed by instance reweighting when source
+and target match on events to be extracted.
+
+When source and
+target corpora have a partial match on events,
+그들은 각 event extraction module을 분리적으로 train 시키는 것을 제안했었다. on the source corpora
+그리고 
+이것의 output을 additional featrues로써 사용했다. for the corresponding modules on the target copora.
+
+더나아가 Miwa et al.
+가짜 negative examples를 걸러내는 heuristics를 통합함으로써,
+corpora를 combining 하는것의 methods를 향상시켰다.
+
+The heuristics 은 에러를 맞추는데 목적이 있다.
+이 에러는 where instances with a ‘None’ annotation
+in one corpus owing to a different focus are all treated as negative
+instances in the combined corpus.
+
+7개의 event-annotated corpora로부터 learning에 method를 적용시키면서,
+그들은 two tasks에서 향상된 성능을보여주었다.
+BioNLP-ST-2011에서,
+
+The successes from cascaded training and example filtering heuristics illuminate some promising directions in corpora adaptation. We expect parallel efforts in system generalization
+and corpora adaptation can complement each other toward
+effective domain adaptation.
+
+Redundancy in subgraph patterns
+
