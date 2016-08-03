@@ -1205,5 +1205,144 @@ The successes from cascaded training and example filtering heuristics illuminate
 and corpora adaptation can complement each other toward
 effective domain adaptation.
 
-Redundancy in subgraph patterns
+#####Redundancy in subgraph patterns
+subgraph patterns에 있어서의 과잉/잉여
+
+유용한 subgraph patterns 감지는
+높은ㅇ 빈도로 나타나는 것을 식별하는 것에 의지한다.
+
+서브그래프는 in corpus에서 큰 graph의 부분일때마다,
+한번 발생한다
+
+> ?
+
+Frequent subgraph mining 은 those subgraphs를 식별하느다.
+그 subgraphs은 주어진 threshold number of times보다 더 많이 발생한다.
+
+
+다양한 실험을 통한 교훈은
+모아진 subgraph patterns 사이의 redundancy는 subgraphs를 feature 로써 사용할때 문제가 발생한다.
+
+> 무슨문제지
+
+많은 작은 subgraphs들은 subisomorphic to other larger frequent subgraphs.
+
+> 많은 작은 subgraphs 들은 그것보다 큰 subgraphㄴ의 일부 동형이다.
+
+이것은 a larger subgraph가 빈번할때 발생한다.
+
+그러므로 그것의 모든 subgraphs들 역시 자동적으로 frequent 할 수 밖에없다.
+
+게다가,
+
+만약 the smaller subgraph gs 가 g1보다 너무 unique 해서 any other larger subgraphs 에 대해서 subisomorphic하지 않다면,
+이 gs, g1 pair은 identical frequency를 공유한다.
+
+이러한 관찰을 기반으로
+
+Luo et al
+오직 저런 관계를 the larger subgraphs 로 유지했다.
+a full pairwise check을 수행할때 cost prohibitve 하다.
+왜냐하면 각 subgraph pair 사이의 the subisomorphism comparison은 NP-complete 이기 때문이다.
+
+그리고 a pair wise approach는 
+수많은 comparisons 들 중 사이에서
+a collection of several tens of thousands of subgraphs들을 요구할 수 있다.
+
+Luo et al
+규모의 순서로 비교하는 the number of subgraph pairs를 감소시키는 hierarchical hash partitioning을 사용하는
+효과적인 알고리즘을 보여주었다.
+
+The key idea는
+어떤것은 오직 어떤것에 의해 사이즈가 다른 subgraphs를 비교할 필요가 있다.
+그리고 그 어떤 것은 더나아가 
+
+The key idea is that one only
+needs to compare subgraphs whose sizes differ by one, and one
+can further partition the subgraphs so that only those within
+the same partition need to be compared.
+
+> 해석 할것
+
+
+The frequent subgraph redundancy는 체계적인 문제이다.
+그리고, the problem of netes terms in automatic term extraction 과 가깝게 연관되어있으며,
+
+다음문제를 위해 제안된 a variety of de-duplicating score (c-value) 는 이전의 문제를 주장하는 것에 적용될 수 있다.
+
+Other graph mining approachs는 또한 the task에 의지하며 응용가능할지도 모른다.
+
+예를들어, 알고리즘은 subgraphs의 'novelty'를 탐색하는 subgraph patterns를 수집하기위해 개발될수있다.
+such as using p-significance to assess
+how unusual it is to see the subgraphs in the current corpus
+
+#####Intergrating with NER
+Most shared task participants들은 
+scratch로부터 그들의 relation extraction 을 기반으로 평가되지않았다.
+
+오히려, 그들의 system이 주어진 the gold standard of named entity annotations 로 평가받았다.
+근데 이 the gold standard 란 심지어 
+
+the i2b2/VA shared tasks와 같이 NER tasks를 포함하는 challenges를 위한 것들이였다.
+
+> ??
+
+따라서,
+그들의 평가 결과들은 
+an upper bound of the end-to-end system performance,
+the tuning of which is in fact a non-trival task 일 가능성이 잇었다.
+
+Kabiljo et al
+end-to-end relation extraction 
+including a keyword-based methods, 
+a co-occurrence-based methods and 
+a method using dependency-graph-based patterns 
+를 위한 몇몇 methods를 평가했었다
+
+그들은 일반적으로 놀라운 performance drop이 
+the gold standard를 사용하는 대신 BANNER같은 NER system에 의해 tagged 된 named entities를 사용했을때 발생한다는것에 집중했다.
+
+추가적으로,
+이는 유용하지만, 관련없는 named entity pairs를 걸러내기 위한 challenging 에서는 아니다.
+for which no relations have been explicitly stated in the text [92].
+
+이러한 filtering은 
+both automatically checking semantic type compatibility
+and
+manually sifting through the remaining tuples.
+a hybrid approach를 적용시킬 수 있다.
+
+
+그러나 관련없는 tuples의 숫자는 관련된 tuples의 숫자를 압도하기 때문에,
+더나은 automated filtering 이 필요하며, 열린 과제로 남아있다.
+
+가장 최근 challenges such as SemEval 2015 Task 14는
+the end-to-end evaluation on joint detection/inference of entities and relations for prespecified relations
+추가했으며,
+
+이러한 evaluation이 more popular 되고, the development of end-to-end systems을 더 빠르게 진행시킨다는 기대는 합리적이다.
+
+
+_ _ _
+최근 Relation extraction은 
+biomedical information extraction에 큰 노력을 집중하고 있다.
+
+미래에는,
+우리는 a migration toward
+biomedical subdomains에 점점더 적용가능한 more unsupervised relation extraction을 향한.
+을 기대한다.
+
+The intergration of relation extraction with named entity detection은
+자동으로 the discovery and curation of novel biomedical knowledge를 할 수 있는 end -to-end systems을 만들어낼 것이다.
+
+With advances in deriving better graph representations
+with more accurate parsers and appropriate dependency
+choices와 함께,
+document 단계에서 coreference resoultion를 향상시킴에 있어서,
+informative subgraph patterns를 통해 더 효과적으로 sifting함에 있어서,
+
+the extraction of biomedical relations는 계속해서
+데이터, 지속된 community efforts 의 질적 측면에 있어서의 향상을 보장할 것이다.
+the rapid progress in the past years 가 주어지면서,
+우리는 더 exciting and promising developments of biomedical relation extraction, which 계속해서 the emerging landscape 를 형성할 수 있고, 연구자들에게 contribute 할 수 있는 기회를 주는
 
