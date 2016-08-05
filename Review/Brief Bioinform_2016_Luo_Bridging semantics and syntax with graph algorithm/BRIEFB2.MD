@@ -828,24 +828,25 @@ the resulting dependency graphs를 사용했다.
 the scientific literature로부터의 relation/event extraction에서의 the experience로부터의
 일관된 관찰과 함께
 
+#시작
+
 ######SemEval 2015 Task 14
-The SemEval 2015 Task 14 는
-disorder identification
-disorder slot filling tasks
-포함한다
 
-Disorder identification is 필수적인 named entity detection 이며
-Disorder slot filling task is BioNLP event extraction tasks 와 비슷하지만,
-clinical subdomain에서 사용되는 차이가 있다.
+The SemEval 2015 Task 는 두가지 Task를 포함하고 있다.
+disorder identification 과 disorder slot filling tasks 를 포함한다
 
-더 나아가 The challenge the slot filling task를 두개의 subtasks로 나눈다.
-one with gold-standard disorder spans (task 2a)
-one without (task 2b)
+Disorder identification 은 essential named entity detection 이며,
+Disorder slot filling task는 BioNLP event extraction task와 비슷하지만, clinical subdomain 에서 사용함에 있어서 차이가 존재한다.
 
-따라서,
-task 2b 는 task 2a에 비해 더 엄격한 평가 결과를 가진다.
 
-The challenge에 의해 정의된 the attribute slots 은 
+더 나아가 the slot filling task를 두개의 sub-tasks로 나눌 수 있는데,
+1. one with gold-standard disorder spans (task 2a)
+2. one without (task 2b)
+
+이렇기 떄문에, task 2b 는 task 2a에 비해 더 엄격한 평가결과 를 가진다.
+
+The challenge에 의해 정의된
+the attribute slots 은 
 
 concept unique identifier (CUI)
 negation (NEG)
@@ -858,10 +859,11 @@ generic (GEN) and
 body location (BL).
 를 포함한다
 
+이들 중에서
 the CUI을 식별하는 것은 the named entity-detection problem 이다.
 그리고, negation and uncertainty을 식별하는 것은 the assertion classification problem 이다.
 
-SUB, COU, SEV, CND, GEN and B 을 식별하는 것들은 binary relation extraction과 더 유사하다.
+SUB, COU, SEV, CND, GEN and BL 을 식별하는 것들은 binary relation extraction과 더 유사하다.
 
 그것들은
 asthe challenge limited the possible values for those slots,
@@ -869,123 +871,167 @@ a layer of abstraction을 추가하면서,
 완전하게 binary relation extraction과 동등하진 않다.
 
 _ _ _
-The challenge 는 
-the participants의 서열을 나누기 위해
-가중치가 적용된 accuracy를 사용한다.
 
-Xu et al. and Pathak et al.은
-일관성있게 
-the top two teams in both task 2a (0.886 and 0.880, respectively)
-and task 2b (0.808 and 0.795, respectively). 
-서열을 나눈다.
+SemEval 2015 Task 에서는 참가연구팀의 서열을 나누기 위해 가중치가 적용된 accuracy를 사용한다.
 
-Xu et al.
+Xu et al. and Pathak et al.은 
+두 task,task 2a (0.886 and 0.880, respectively) and task 2b (0.808 and 0.795, respectively), 
+매번 the top two teams 를 차지한다.
+
+######Xu et al.
 BL slot filling 을 위해
 Conditional Random Field (CRF) 를 the classifier로 사용한다.
 
-그리고 other slots을 위해
+> 조건부 무작위장 통계적 모델링 방법, 패턴 인식과 기계 학습과 같은 구조적 예측에 사용된다. 
+> 일반적인 분류자(영어: classifier)가 이웃하는 표본을 고려하지 않고 단일 표본의 라벨을 예측하는 반면, 조건부 무작위장은 고려하여 예측한다. 자연 언어 처리 분야에서 자주 사용되는 선형 사슬 조건부 무작위장(영어: linear chain CRF)은 일련의 입력된 표본들에 대해 일련의 라벨들을 예측한다.
+
+CRF (for BL)은 그것 자체가
+(integrating semantic and syntactic features including n-grams, context words, dictionaries and section names)
+
+tokens 과 hidden states 를 node로써 사용하고
+node 간 연결은 transition and emission edges 를 사용한다.
+이로써 graph-based model이 된다.
+
+그리고 other slots ( BL 을 제외한 나머지 )는
 SVM을 the classifier 로써 사용한다.
 
-추가적으로 The SVM classifier는 the disorder mentions의 into and out 에서의 dependencies를 사용한다.
+> BL slot filling 의 the classifier은 CRF.
+> 나머지 slot filling 의 the classifier는 SVM 을 사용하는구나.
+
+The SVM classifier additionally used dependencies coming into and out of the disorder mentions.
+
+추가적으로 The SVM classifier는 dependencies를 사용한다.
+dependencies는 the disorder mentions이 시작되고 끝나게 하는 관계를 표시한 dependency 이다.
+
+> (into)-mention-(out) 뭐 이런식의 tree겠지
 
 these dependencies는 multi-hop syntax dependence를 잡아낼순없지만,
-저자들은 that NEG/UNC/COU/SEV/GEN always have one-hop dependence 를 관찰한 것을 주목해라
+저자들은 NEG/UNC/COU/SEV/GEN always have one-hop dependence 를 관찰했고
+이는 주목할 만하다.
 
-반면에,
-CRF (for BL) 는 그것 자체가 tokens 과 hidden staes 를 노드로써 사용하고
-(integrating semantic and syntactic features including n-grams, context words, dictionaries and section names)
-interconnects nodes with transition and emission edges 를 사용함으로써
-로 graph-based model 이 된다.
+> CRF 와 SVM 의 차이가 존재함!
 
-Pathak et al.
-slot detection을 두 부분으로 나누었다.
+
+######Pathak et al.
+slot detection을 파트로 나누었다.
 
 1.detecting keywords
 2.relating keywords with disorder mentions.
 
-그들은
-bag-of-words 와 orthographic features to detect keywords와 같은 features로 훈련된 CRF과 함께 통합된
-dictionary look-up ( 검색 ) 을 사용했다.
+> 1. keywords를 먼저 찾고,
+> 2. disorder mentions와 keyword를 관계짓는 것.
 
+1.
+그들은
+CRF을 bag-of-words 와 orthographic features to detect keywords와 같은 features로 훈련시켰고,
+CRF과 함께 통합된 dictionary look-up ( 검색 ) 을 사용했다.
+
+> 검색 -> 찾기
+
+2.
 keyword를 disorder mentions와 연관짓기 위해,
 그들은 Xu et al과 비슷한 features에다 Part-of-Speech tags를 추가적으로 사용하면서, SVM를 훈련시켰다.
 
+> 연관짓기
 
-Other teams는 간접적인 graph-mining algorithms을 사용했다.
-그리고, 그러나 경쟁적으로는 사용되지않았다 ?
+Other teams는 간접적인 graph-mining algorithms을 사용했고, 위 방법과 경쟁될만한 결과가 나오진않았다.
 
-> ?
+> 결과가 경쟁도 못할 정도였다 정도?
+
 
 예를들어,
 
-Hakala et al.
+######Hakala et al.
 
-TEES system을 SemEval data foramt과 함께 작동될 수 있도록 적용시킴으로써 task 2a를 다뤘고,
-3위에 해당하는 a weighted accuracy of 0.857를 성취했다.
+TEES system을 SemEval data format과 함께 작동될 수 있도록 적용시킨 시스템을 통해
+task 2a를 다뤘고, 3위에 해당하는 a weighted accuracy of 0.857를 성취했다.
 
-이것은 주어진 many slot이 one-hop dependencies를 포함하고 있기 때문에, 놀랄일이아니다.
-full-fledged graph-based approach는 오직 한정된 benefits를 제공한다.
+> 그 순위정하는 weighted accuracy
+
+이것은 주어진 many slot이 one-hop dependencies를 포함하고 있기 때문에, 
+full-fledged graph-based approach는 오직 한정된 benefits를 제공한다는 것은 놀랄일이아니다.
+
+> 한정된 benefits이 뭔지 찾아낼것
 
 게다가,
-the controlled vocabulary and controlled format nature of challenge tasks는 그들 자체로
-CRF에 맞게 만들어진다.
-states and state-transitions의 한정된 숫자가 덜 빈약하고 더 튼튼한 probability estimation으로 이끌기 때문에,
+
+This is not surprising, as given many slots only involve one-hop dependencies, full-fledged graph-based approach only offers limited benefits. 
+
+In addition, the controlled vocabulary and controlled format nature of challenge tasks 
+는 limited number of states and state-transitions 가 덜 sparse하게 이끌고, 더 probability estimation을 튼튼하게 만들기때문에,
+그들 스스로 CRF에 맞게 만들어진다.
+
+> CRF 통계적 모델
+> sparse : 유의미한 데이터가 극히 적다.
 
 
 
-######Separately motivated clinical relation extraction
 
-After the i2b2 challenges,
-몇몇 authors 는 the concept and relation extraction steps를 
-통합된 pipeline and/or generalizing to the extraction of complx or even nested relations 로써 통합하는 것을 목적으로했다.
+#####Separately motivated clinical relation extraction
 
-> 통합충~~
+the i2b2 challenges 후에,
+몇몇 authors 는 
+the concept and relation extraction steps를 
+통합된 pipeline and/or generalizing to the extraction of complex or even nested relations 로써 통합하는 것을 목적으로했다.
 
-Xu et al.
+> Load ahead에 나오는 목표처럼
+> 통합된, generalized method를 만드는게 목표
+
+######Xu et al.
 a rule-based system MedEx을 만들었다.
 이는, medications 와 그것들과 연관된 strenghs, routes and frequencies간의 특정 관계들을 추출하는 system이다.
 
 The MedEx system은 narrative sentences in clinical notes를
 conceptual graph representations of medication relations로 변환한다.
 
-이것을 그렇게 하기위해,
-
+그 방법은,
 Xu et al은 직접 conceptual graphs로 mapping 할 수 있는 a semantic grammar를 설계했고,
-이 grammar에 따라 sentences를 parse 할 수 있게 the Ky Chart Parser를 사용했다.
+이 grammar에 따라 the Kay Chart Parser를 사용하여 sentences를 parse 했다.
 
-그들은 또한
+그 후에,
 regular-expression-based cunker을 
 the Kay Chart Parser가 놓친 medications를 잡아내는데 사용했다.
 
+> 1. narrative sentences를 conpetual 그래프로 mapping 할 수 있는 grammar을 설계함.
+> 2. 설계한 grammar를 이용하여 the Kay Char Parser로 sentences들을 parse 함
+> 3. 2의 파싱과정에서 놓친 medicine을 정규표현식을 이용하여 잡아냄.
 
-Weng et al.
-a customized syntactic parser을 text spcifying clinical eligibility criteria에 적용했다.
 
-그들은 maximal frequent subtree patterns를 추출했고,
-직접 통합했으며,
-그것들을 the UMLS와 함께 enrich 하게 했다.
-a semantic representation for eligibiltiy criteria which aims to enable semantically meaning ful search queris over ClinicalTrials.gov 하기 위해.
+######Weng et al.
+a customized syntactic parser을 text specifying clinical eligibility criteria에 사용함.
 
-Luo et al.
-the Stanford Parser을 UMLS-based concept recognition과 함께
-정확하게 graph representations for sentences in pathology report 하도록 발전시켰다.
+> 의학적 자격 기준을 구별하는 텍스트..?
 
+그들은 가장 많이 빈번하게 나오는subtree patterns를 추출했고,
+
+ClinicalTrials.gov를 뛰어넘는 의미론적으로 의미있는 search query를 가능하게 하는 것을 목표로 하는 
+자격기준을 위한 semantic representation 을 만들기 위해 the UMLS와 통합시켰다.
+
+> 더 의미론적인 검색이 가능하게끔 하기위해 UMLS을 직접 통합했다.
+> 그래서 이친구들이 만든 서비스가 뭐지?
+> 
+
+1. 가장 빈번하게 나오는 subtree patterns를 추출했다.
+2. UMLS를 통합시켜 새로운 search query가 가능한 것을 만드려고 했다.
+
+######Luo et al.
+the Stanford Parser을 UMLS-based concept recognition를 이용하여,
+정확한 graph representations for sentences in pathology report 을 나타낼 수 있도록 했다.
 여기서 pathology report란 the graph nodes가 medical concepts와 같은 것.
 
-그 다음 빈번하게 나타나는 subgraph mining 은
-medical concepts간의 중요한 semantic relations을 모으는데 사용되었다.
+그 다음 빈번하게 나타나는 subgraph mining 은 
+림프종의 하위 유형을 분류 하기위한 기반의 중요한 semantic relation을 수집하는데 사용되었다
 (e.g. which antigens are expressed on neoplastic lymphoid cells)
-which serve
-as the basis for classifying lymphoma subtypes.
+
+위의 the subgraph-based feature generation을
+unsupervised learning으로 연장시켰다.
 
 Luo et al.
-위의 the subgraph-based feature generation을 unsupervised learning으로 연장시켰다.
 
-Luo는 더 나아가 tensor factorization을 subgraphs를 그룹짓기위해 사용했다.
+Luo는 더 나아가 tensor factorization을 sub graphs를 그룹짓기위해 사용했다.
 
-The intuition (직관적 통찰)은 
-각 subgraph가 test result와 일치하고,
-subgraph group이 test 이 전형적으로 진단 가이드라인에서 사용되는 것처럼 a panel of test results를 보여주는것이다.
+The intuition (직관적 통찰)은 각 subgraph가 test result와 일치하고,
+test가 전형적으로 진단 가이드라인에서 사용되는 것처럼 subgraph group이 a panel of test results를 보여준다
 
 The tensors 3개의 차원을 통합했다.
 patients, common subgraphs and individual word in each report.
@@ -993,19 +1039,21 @@ patients, common subgraphs and individual word in each report.
 The words는 subgraphs들을 더 낫게 group화 하는것에 도움을 준다.
 lymphoma subtype diagnostic criteria 을 회복하는 것을 위해서
 
+> 여기 한번더 볼것
 
 #####Shared resources for relation extraction
 
-The shared tasks and separately notivated research on biomedical relation extracation은
+The shared tasks 과 separately notivated research on biomedical relation extracation은
 오직 the state-of-the-art in methodology 발전한게 아니라
 the utilzation of a repository of shared resources 를 만들고 보여주었다.
 
+> 방법론의 발전이 아닌 저장소의 사용도 보여주었다.
+> 그니까 공유하는 법도 늘었다 이거지.
+
 shared resources 는 knowledge bases 부터 shared corpora to graph ming toolkits까지의 범위.
 
+이 resource들을 Table 3에
 우리는 카테고리화하고 요약해놓았다.
-이 resource들을
-Table 3에
-
 미래의 연구 노력을 위한 resource navigation의 시작 포인트로써 제공되길 바란다.
 
 Some of those resource는 일반적인 분야와 연관이 있다.
@@ -1014,99 +1062,124 @@ Some of those resource는 일반적인 분야와 연관이 있다.
 Some 은 포괄적으로 the biomedical domain과 연관이 있다.
 (e.g. domain-specific terminology/ontology resources Gene Ontology [161], UMLS [58], Medical Subject Heading [162] and Biothesaurus [122]);
 
-Some 은 target-specific biomedical subdomain
+Some 은 target-specific biomedical subdomain과 연관이 있다.
 (e.g. knowledge bases such as PDB [101], Uniprot [121], SIDER [164], DrugBank [165], HIVDB [166], RegaDB [167], Entrez Gene [153], GENA [18]
 and IntAct [169])
 
 
-##### Lraod ahead
-비록 graph-based algorithms을 the extraction of biomedical relations에 적용시킴에 있어서  주목할만한 과정들이 발견되었지만,
-실용적인 relation extraction methods 를 개발하는데 있어서 장벽은 generalizable and sufficiently accurate 이다.
+##### Load ahead
+
+비록 graph-based algorithms을 the extraction of biomedical relations에 적용시키면서 주목할만한 과정들이 발견되었지만,
+실용적인 relation extraction methods 를 개발하는데 장벽이 두가지 존재한다.
+
+generalizable and sufficiently accurate 이다.
 
 > 일반화와 그리 높지않은 정확성
- 
+
+
 밑에 우리는 몇몇 장벽과 이를 극복할 수 있는 잠재적인 방향에 대해서 설명해놓았다.
 
 #####Not all parsers and dependency encodings are synergistic
-#####모든 parsers와 dependency encodings는 synergistic 한것은 아니다.
-반복적으로 the choice of the parser and dependency encdoings 는 relation extraction system's performance에서 중요한 역할을 할지도 모른다는 것은 주목 할만한다.
+> 모든 parsers와 dependency encodings는 synergistic 한것은 아니다.
+> parser와 dependency encoding이 같이 쓰인다고 해서 항상 좋은 것은 아니다. ?
 
-Buyko et al.
+반복적인 the choice of the parser and dependency encoding 는 
+relation extraction system's performance에서 중요한 역할을 할지도 모른다는 것은 주목 할만한다.
+
+> 파서와 dependency endcoding의 선택은 
+> 관계 추출 시스템의 성능에 중요한 역할을 할지도 모른다는거야.
+> 근데 이렇다고 해서 항상 두개가 시너지 효과를 내는건 아니라 이거지
+
+######Buyko et al.
 the impact of graph encoidng based on different parser 
 (Charniak-Johnson, McClosky-Charniak-Johnson, Bikel, Gdep, MST, MALT)
 and dependency representations  에 대한 compative analysis를 수행했다.
 (Stanford Dependency and CoNLL dependency).
 
-그리고 
-the CoNLL dependency representation 이 
-the Stanford Dependency representations보다 4개의 parser를 통합해서 사용하는 것에있어서
-더 나은 성능을 보여준다는것을 발견했다.
+> 다른 파서와 다른 dependency representations으로 얼마나 차이나는지 수행해보았다.
 
-그리ㅗㄱ
-McCLosky-Charniak-Johnson parser 은 빈번하게 가장 성능 좋은 parser이기도 했다.
+그리고 the CoNLL dependency representation 가
+the Stanford Dependency representations 에 비해
+4개의 parser를 통합해서 사용했을때 더 나은 성능을 보여준다는것을 발견했다.
+
+그리고 McCLosky-Charniak-Johnson parser 은 자주 가장 성능 좋은 parser이기도 했다.
 
 Miwa et al. 같은경우
 BioNLP-ST-2009 를 위해 five syntactic parser 를 비교했다.
 
-그들은
-비록 각각 parsers를 사용하는 것으로부터의 성능은 크게 차이나지않지만,
+5개의 syntactic parser들은 비록 각각 parsers를 사용하는 것으로부터의 성능은 크게 차이나지않지만,
 parsers 여러개를 쓰거나, 다른 dependency representations를 쓰는것은 the event extraction results를 크게 향상시킬수 있다고 결론지었다.
 
 > 혼합해서 쓰는게 좋다고하네여
 
-Stanford Dependency 는 the most wideely used dependency encoding 이기 떄문에,
-그들은 또한 이에대해 다양한 다른 Stanford Dependecy variants들을 사용하였고,
+Stanford Dependency 는 가장 널리 사용되고있는 dependency encoding 이기 떄문에,
+Miwa et al 은 이에대해 다양한 다른 Stanford Dependecy variants들을 사용하였고,
 만약 dependency edges의 types가 유지된다면  basic dependency 가 최고성능을 보인다는 것을 발견했다.
 
-반면에,
-만약 types of dependecy edges를 무시한다ㅕㄴ,
-그들은 the collapsed dependency variant 가 최고의 성능을 보여준다는것을 발견했다.
-
-Luo et al 에 의해 밝혀였다.
+그 반면 Luo et al 에 의해,
+만약 types of dependecy edges를 신경쓰지않고 사용한다면,
+그들은 the collapsed dependency variant 가 최고의 성능을 보여준다는것이 밝혀졌다.
 
 In [49] 에서,
-the task 는 relations를 lymphma subtypes를 분류하기위한 features로써 추출하는 것이였다.
-in the BioNLP_ST event extraction tasks에서 superviesed relation classification에서 처럼
-그들 자체를 분류하는것 대신.
+the task 는 lymphma subtypes를 분류하기위해
 
-따라서, recall은 the feature learning step에서 관심이 있는 것이 되었다.
-the feature learning step이란 types of dependencies를 무시하는 것이 the coverate of subgraph patterns 향상에 도움을 주는것,
+The BioNLP_ST event extraction tasks에서 superviesed relation classification에서처럼 
+그들 자체를 분류하는것 대신
 
-이를 통해서 배운 The lessons은 각 challenges로부터의 top participants로부터 각각 reports들이 확립된 것처럼 보인다.
+relations를 features로써 추출하는 것이였다.
 
-그리고 The lessons들은 parser-dependency choice의 인기와 함께 consistent 이다. 
-non-challenge applications in sections Pharmacogenomics and Sepearately motivated clinical relation extraction.
+> classification 하는것 대신 relation extraction 한다?
+
+따라서, recall은 the feature learning 단계에서 가장 관심을 가지게 되었다.
+the feature learning 단계란 
+types of dependencies를 무시하는 것이 the coverage of subgraph patterns 을 향상시키는데에 도움을 주는것을 말한다.
+
+> dependency의 type 을 무시하는 것은 더 넓은 범위의 subgraph pattern을 찾을수 있게 한다..
+> 
+
+위 실험들을 통해서 배운 교훈은 각 challenges로부터의 top 연구참가팀으로부터 각각 reports들이 확립된 것처럼 보인다.
+
+그리고 The lessons들은 parser-dependency choice의 인기와 함께 
+non-challenge applications in sections Pharmacogenomics 와
+Sepearately motivated clinical relation extraction.
+은 여전히 인기가 있다. 
 
 특히,
-우리는 good combination은 the McClosky-Charniak-Johnson parser 나 Stanford parser augmented with medical lexicon 으로부터 선택하는 것이라고 기대한다
+우리는 the McClosky-Charniak-Johnson parser 나 Stanford parser augmented with medical lexicongood combination이라고 생각한다.
+또한 either CoNLL dependency or collapsed Stanford dependency 을 선택하는 것도 좋은 방법이라고 생각한다.
 
-그리고 either CoNLL dependency or collapsed Stanford dependency 으로부터 선택하느 ㄴ것.
 
+#####Intergrating coreference resolution
+> coreference 동일지시어
+> 
+Coreference는 biomedical literature 나 clinical narrative text에서 
+같은 개념을 위해 prounouns, anaphora and varied entities의 사용으로부터 자주 발생한다.
 
-Intergrating coreference resolution
-Coreference는 빈번하게 biomedical literature 나 clinical narrative text에서 발생한다.
-the same concepts을 위해 prounouns, anaphora and varied entities의 사용으로부터 발생하면서,
+> literature에서 같은 개념을 가리킬때
+> 대명사나 뭐 여러 방법으로 표현하면서 다양한 방법으로 나타날수있어.
+> 이게 바로 동일지시어 
 
-Care must be exerciesd to transfer the correct relation along the coreference chain.
-
+> coreference chain에 따라 정확한 관계가 전해지도록 관심을 기울여야한다.
 
 그러나, relation and event extraction을 위한  Many of the reviewed approaches는 a built-in coreference resolution component를 가지고 있지않다.
 
-Miwa et al
+> 관계나 이벤트를 추출하기 위해서,
+> 위에서 보았던 많은 시스템들은 coreference resoultion 을 처리할 수 있는 built-in componenet가 존재하지않아.
+
+######Miwa et al
 구체적으로
 the impact of using a coreference resoulution 에 대해 연구했고,
-improved event extraction performance 를 보여주었다.
+향상된 event extraction performance 를 보여주었다.
 
-특히,
-그들은 a rule-based coreference resolution system을 개발했는데.
-이는 detecting rules for mextion antecedent and coreferential link로 구성되어있다.
+특히, 그들은 a rule-based coreference resolution system을 개발했는데.
+이는 detecting rules for mention antecedent and coreferential link로 구성되어있다.
 
-그들은 
-the coreference information을 syntactic parse results를 조절하는데 사용했다
-antecedent and mention share dependencies
+그들은 the coreference information을 
+antecedent and mention이 dependencies를 나누기 위해
+syntactic parse results를 조절하는데 사용했다
 
 
-Features는 또한 확장되었다 between mentions and antecedents.
+Features는 또한  between mentions and antecedents 확장되었다
 
 the importance of coreference features를 recognizing 하면서,
 그후에 몇몇 systems는 across sentences 하여 coreference resoulition 을 보충했다
@@ -1116,22 +1189,18 @@ heuristic/rule-based coreference resoulition이 domain-adapted statistical machi
 
 Part of their lessons 는 in relation extraction corpora에서 the lack of gold-standard coreference anotation을 걱정했다
 
-따라서,
-우리는 기대한다.
-paired relation and coreference annotations 는
-coreference resolution and ultimately relation extraction 을 향상시킬수 있다는 것을.
+따라서, 우리는 paired relation and coreference annotations 는
+coreference resolution and ultimately relation extraction 을 향상시킬수 있다는 것을 기대한다.
 
 게다가,
-coreference resolution을 the learning objective of relation extraction에 통합하느 ㄴ것은
+coreference resolution을 the learning objective of relation extraction에 통합하는 것은
 더 포괄적인 최적화와 더나은 end-to-end performance로 이끌지도 모른다.
-
 
 
 ######General relation and event extraction and domain adaption
 
 최신 relation and event exttraction systems from shared tasks 는
-대부분 around domain-specific definitions of relations and events, many of which are in fact binary (PPI, DDI) and i2b2/VA challenge
-이다.
+대부분 around domain-specific definitions of relations and events, many of which are in fact binary (PPI, DDI) and i2b2/VA challenge 이다.
 
 > 그니까 요즘 relation and event extraction system은 모두 일반적으로 사용할수 있는 툴이 아닌 특정 분야를 대상하로 한 툴.
 
@@ -1161,7 +1230,7 @@ Another challenge는 the training data를 염려한다.
 
 THe problem of limited training data 는
 종종 NLP systmes의 개발을 괴롭힌다.
-the relation extraction systems는 예와가 없다.
+the relation extraction systems는 예외가 없다.
 
 더나은 존재하는 annotated corpora의 사용을 만들기위해,
 domain adaptation from external training corpora(source) to the target corpora를 수행하는 것은 필수적이다.
@@ -1182,8 +1251,7 @@ adding
 source instances followed by instance reweighting when source
 and target match on events to be extracted.
 
-When source and
-target corpora have a partial match on events,
+When source and target corpora have a partial match on events,
 그들은 각 event extraction module을 분리적으로 train 시키는 것을 제안했었다. on the source corpora
 그리고 
 이것의 output을 additional featrues로써 사용했다. for the corresponding modules on the target copora.
@@ -1209,7 +1277,7 @@ effective domain adaptation.
 subgraph patterns에 있어서의 과잉/잉여
 
 유용한 subgraph patterns 감지는
-높은ㅇ 빈도로 나타나는 것을 식별하는 것에 의지한다.
+높은 빈도로 나타나는 것을 식별하는 것에 의지한다.
 
 서브그래프는 in corpus에서 큰 graph의 부분일때마다,
 한번 발생한다
@@ -1227,7 +1295,7 @@ Frequent subgraph mining 은 those subgraphs를 식별하느다.
 
 많은 작은 subgraphs들은 subisomorphic to other larger frequent subgraphs.
 
-> 많은 작은 subgraphs 들은 그것보다 큰 subgraphㄴ의 일부 동형이다.
+> 많은 작은 subgraphs 들은 그것보다 큰 subgraph의 일부 동형이다.
 
 이것은 a larger subgraph가 빈번할때 발생한다.
 

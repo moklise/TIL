@@ -1,0 +1,90 @@
+Phamacogenomics 분야에선
+유전적 돌연변이와 drug response phenotypes 사이의 흥미로운 relations를 찾아내기위해
+literature and clinical text 사용을 중심으로 많은 노력들이 이루어 지고 있다고 한다.
+
+이 시스템의 성능은 서로 같은 corpora를 사용하는 것이 아니기 떄문에 비교하기가 힘들지만,
+the translational application and adaptation of some state-of-the-art biomedical relation extraction techiniques 을 만들어 낸다.
+
+
+
+Coulet et al. 
+
+17 million MEDLINE abstacts 를 이용하여
+a semantic network knowledge based 를 만들어냈다.
+
+
+
+
+Percha et al
+
+the dependency graph에서 two naemd entities간의 Shortest Path를 찾기위해 BFS 사용.
+
+이를 gene product 와 함께 상호작용하는 those drugs를 기준으로 통합시켜 DDI를 추론하는데 사용.
+
+
+wang et al.
+잠재 디리클레 할당 : 문서에서의 단어수 분포를 기준으로, 그 문서가 어떤 주제를 다루는지 예측할 수 있는 확률적 모델
+
+1. biomedical named entities를 표현하기위해 잠재 디리클린 할당을 이용했고,
+2. pair of entities 간의 the association distance를 계산하기 위해 Kullback-Leibler(KL) divergence 를 이용했고,
+
+3. named entity pair 간의 candidate associations 를 그 pair들끼리 이루는 the path의 합을 이용하여 서열화 했다.
+
+4. 새로운 dene-grug associations을 탐색하고 예측하고, 분자구조상의 치료적 그리고 독성적 profiles을 비교하기위해 the mined semantic network를 탐색하는 새로운 방법을 보여주었다.
+
+----------------------------------
+
+Other system
+
+Katrenko et al
+gene-protein relation 과 protein-protein relation extraction 을 이용하여,
+
+두 named entities간의 가장 가까운 공통부모를 뿌리로 하고 있는 the subtrees 를 features로 두는 the dependency parse trees를 이용한다고 함.
+
+이 실험에서는
+the Link Grammar Parser, Minipar and the Charniak Parser을 포함한 여러 parser들을 사용했어
+
+각각의 parser의 결과를 비교했을때,
+stacking and AdaBoost 와 같은 메소드들을 같이 사용하고,
+여러 parser의 결과들을 통합했을때
+향상된 결과가 나오는 것을 확인했다.
+
+
+Hakenberg et al.
+이 실험은 Genes, SNP variants, drugs, ADRs 사이의 relation을 목표로,
+
+특정 relations extraction을 위해 co-occurence에 의존했다고 함.
+(e.g. gene-drug, gene-diseases, drug-disease)
+
+그들은 특정 relations extraction 을 co-occurence에 의존하고 있었지만,
+다른 유형의 relations 을 위해 스탠포드 파서의 결과물인 subtree을 이용하여 co-occurence 를 발전시켜 사용하고 있었다고 한다.
+여기서 subtree에서는 binary relations을 고려했고, 공통부모를 가지고있는 named entity pairs의 subtrees를 사용했다.
+The mined realtions은 cross-referenced with knowledge bases 되어,
+EntrezGene, PharmGKB and PubChem에서 볼 수 있다고 한다.
+
+
+Bui et al.
+HIV 약 내성을 예측하기 위해 drugs 와 virus mutations 간의 relations extraction 을 목표로 함
+
+Stanford Parser를 이용하여, constituent parse trees를 만들었다.
+그리고 drug-gene relations을 extraction 하기 위해 트리구조를 탐색할 수 있는 grammatical rules를 개발했다.
+이 System은 새로운 HIV 약 내성 후보를 먼저 고르기 위해 5개의 병원에서 사용되고 있다고 한다.
+
+
+
+----------------------------------
+
+Pharmacogenomics에서 path를 기반으로 하는 시스템과 tree를 기반으로 하는 시스템은
+다른 shared tasks에서 사용되는 f-measure과 다르게,
+이는 더욱 신뢰할 수 있는 pharmacogenomic semantic networks를 만들기 위해
+evaluation에서 recall 보다는 precision에 더 집중하는 경향을 보인다.
+
+왜냐하면 초기 semantic network에서 발생하는 수 많은 noise들은 relation을 찾는 것을 방해할 수 있는 반면,
+relations를 놓치는 것은 추후에 더 많은 literature를 사용하여 발견할 수 였는 여지가 존재하기 때문이다.
+
+pharmacogenomics relation extraction system의 평균 precision 은 70~80% 이다.
+
+우리는 이 시스템들을
+1. biomedical models과 함께 훈련된 parsers을 사용하고,
+2. enriched graph-based features를 사용하면
+더 큰 이익을 제공할 것이라고 생각하고있다
